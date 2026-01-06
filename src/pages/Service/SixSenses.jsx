@@ -21,9 +21,11 @@ const SixSenses = () => {
         badge: "HÀNH TRÌNH ĐẶC BIỆT",
         title: "Six Senses - Trải Nghiệm Đa Giác Quan",
         subtitle: "Khám phá thế giới bằng tất cả 6 giác quan của bạn",
-        description: "Một hành trình 7 ngày độc đáo, nơi bạn sẽ học không chỉ bằng trí tuệ mà còn bằng trái tim, cảm xúc và tất cả các giác quan. Từ thiên nhiên hùng vĩ đến văn hóa bản địa, mỗi khoảnh khắc đều là một bài học sống động.",
-        highlightText: "7 ngày chuyển hóa • 6 giác quan khám phá • Trọn vẹn trải nghiệm",
-        ctaButton: "Tìm Hiểu Ngay"
+        description:
+          "Một hành trình 7 ngày độc đáo, nơi bạn sẽ học không chỉ bằng trí tuệ mà còn bằng trái tim, cảm xúc và tất cả các giác quan. Từ thiên nhiên hùng vĩ đến văn hóa bản địa, mỗi khoảnh khắc đều là một bài học sống động.",
+        highlightText:
+          "7 ngày chuyển hóa • 6 giác quan khám phá • Trọn vẹn trải nghiệm",
+        ctaButton: "Tìm Hiểu Ngay",
       },
       gridSection: {
         agua: "AGUA",
@@ -46,38 +48,42 @@ const SixSenses = () => {
       },
       heroSection: {
         title: "Hành trình 7 ngày và các hoạt động đặc biệt",
-        subtitle: "7 ngày, 7 làn sóng mở ra hành trình khám phá bản thân, cảm hứng và sự kết nối sâu sắc với thế giới xung quanh từ 20-26/10/2025",
+        subtitle:
+          "7 ngày, 7 làn sóng mở ra hành trình khám phá bản thân, cảm hứng và sự kết nối sâu sắc với thế giới xung quanh từ 20-26/10/2025",
         ctaButton: "Bắt Đầu Hành Trình",
         stats: {
           students: "10,000+",
           experiences: "500+",
           countries: "20+",
-          satisfaction: "98%"
-        }
+          satisfaction: "98%",
+        },
       },
       finalSection: {
         title: "Sẵn Sàng Cho Hành Trình Chuyển Hóa?",
         subtitle: "Đăng ký ngay để trở thành một phần của cộng đồng Six Senses",
-        description: "Hãy để chúng tôi đồng hành cùng bạn trong hành trình khám phá bản thân và kết nối với thế giới. Mỗi bước chân là một trải nghiệm, mỗi trải nghiệm là một câu chuyện đáng nhớ.",
+        description:
+          "Hãy để chúng tôi đồng hành cùng bạn trong hành trình khám phá bản thân và kết nối với thế giới. Mỗi bước chân là một trải nghiệm, mỗi trải nghiệm là một câu chuyện đáng nhớ.",
         features: [
           "Trải nghiệm đa giác quan độc quyền",
           "Hướng dẫn bởi chuyên gia tâm lý và giáo dục",
           "Môi trường an toàn và hỗ trợ 24/7",
           "Kết nối với cộng đồng cùng chí hướng",
-          "Chứng nhận hoàn thành hành trình"
+          "Chứng nhận hoàn thành hành trình",
         ],
         ctaPrimary: "Đăng Ký Ngay",
-        ctaSecondary: "Tải Brochure Chi Tiết"
-      }
+        ctaSecondary: "Tải Brochure Chi Tiết",
+      },
     },
     en: {
       introSection: {
         badge: "SPECIAL JOURNEY",
         title: "Six Senses - Multi-Sensory Experience",
         subtitle: "Discover the world with all your 6 senses",
-        description: "A unique 7-day journey where you'll learn not only with your mind but also with your heart, emotions, and all senses. From majestic nature to indigenous culture, every moment is a living lesson.",
-        highlightText: "7 days of transformation • 6 senses exploration • Complete experience",
-        ctaButton: "Learn More"
+        description:
+          "A unique 7-day journey where you'll learn not only with your mind but also with your heart, emotions, and all senses. From majestic nature to indigenous culture, every moment is a living lesson.",
+        highlightText:
+          "7 days of transformation • 6 senses exploration • Complete experience",
+        ctaButton: "Learn More",
       },
       gridSection: {
         agua: "AGUA",
@@ -100,30 +106,32 @@ const SixSenses = () => {
       },
       heroSection: {
         title: "The 7-day journey AND  signature activities",
-        subtitle: "7 days, 7 waves of discovery, exploring the self, inspiration, and meaningful connection with the world from October 20–26, 2025.",
+        subtitle:
+          "7 days, 7 waves of discovery, exploring the self, inspiration, and meaningful connection with the world from October 20–26, 2025.",
         ctaButton: "Start Your Journey",
         stats: {
           students: "10,000+",
           experiences: "500+",
           countries: "20+",
-          satisfaction: "98%"
-        }
+          satisfaction: "98%",
+        },
       },
       finalSection: {
         title: "Ready for Your Transformation Journey?",
         subtitle: "Register now to become part of the Six Senses community",
-        description: "Let us accompany you on your journey of self-discovery and world connection. Every step is an experience, every experience is a memorable story.",
+        description:
+          "Let us accompany you on your journey of self-discovery and world connection. Every step is an experience, every experience is a memorable story.",
         features: [
           "Exclusive multi-sensory experience",
           "Guidance by psychology and education experts",
           "Safe environment with 24/7 support",
           "Connection with like-minded community",
-          "Journey completion certificate"
+          "Journey completion certificate",
         ],
         ctaPrimary: "Register Now",
-        ctaSecondary: "Download Detailed Brochure"
-      }
-    }
+        ctaSecondary: "Download Detailed Brochure",
+      },
+    },
   };
 
   // Get content based on current language
@@ -146,7 +154,7 @@ const SixSenses = () => {
         introSectionRef.current?.querySelector(".intro-badge"),
         { y: -30, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-        0
+        0,
       );
 
       // Animate title
@@ -154,7 +162,7 @@ const SixSenses = () => {
         introSectionRef.current?.querySelector(".intro-title"),
         { y: 50, opacity: 0 },
         { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
-        0.3
+        0.3,
       );
 
       // Animate subtitle
@@ -162,7 +170,7 @@ const SixSenses = () => {
         introSectionRef.current?.querySelector(".intro-subtitle"),
         { y: 40, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-        0.6
+        0.6,
       );
 
       // Animate description
@@ -170,7 +178,7 @@ const SixSenses = () => {
         introSectionRef.current?.querySelector(".intro-description"),
         { y: 30, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-        0.9
+        0.9,
       );
 
       // Animate highlight text
@@ -178,7 +186,7 @@ const SixSenses = () => {
         introSectionRef.current?.querySelector(".intro-highlight"),
         { scale: 0.9, opacity: 0 },
         { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.7)" },
-        1.2
+        1.2,
       );
 
       // Animate CTA button
@@ -186,7 +194,7 @@ const SixSenses = () => {
         introSectionRef.current?.querySelector(".intro-cta"),
         { scale: 0.8, opacity: 0 },
         { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)" },
-        1.5
+        1.5,
       );
     }, introSectionRef);
 
@@ -268,24 +276,25 @@ const SixSenses = () => {
         heroSectionRef.current?.querySelector(".title-text"),
         { y: 100, opacity: 0 },
         { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
-        0
+        0,
       );
 
       // Animate highlighted spans
-      const highlightedSpans = heroSectionRef.current?.querySelectorAll(".highlight-text");
+      const highlightedSpans =
+        heroSectionRef.current?.querySelectorAll(".highlight-text");
       if (highlightedSpans) {
         heroTl.fromTo(
           highlightedSpans,
           { scale: 0.8, opacity: 0, y: 20 },
-          { 
-            scale: 1, 
-            opacity: 1, 
-            y: 0, 
-            duration: 0.8, 
+          {
+            scale: 1,
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
             stagger: 0.2,
-            ease: "back.out(1.7)" 
+            ease: "back.out(1.7)",
           },
-          0.4
+          0.4,
         );
       }
 
@@ -294,7 +303,7 @@ const SixSenses = () => {
         heroSectionRef.current?.querySelector(".hero-subtitle"),
         { y: 50, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-        0.6
+        0.6,
       );
 
       // Animate hero image with parallax effect
@@ -305,7 +314,7 @@ const SixSenses = () => {
           heroImage,
           { scale: 1.1, opacity: 0 },
           { scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" },
-          0.8
+          0.8,
         );
 
         // Parallax scroll effect
@@ -342,7 +351,7 @@ const SixSenses = () => {
         finalSectionRef.current?.querySelector(".final-title"),
         { y: 50, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-        0
+        0,
       );
 
       // Animate subtitle
@@ -350,7 +359,7 @@ const SixSenses = () => {
         finalSectionRef.current?.querySelector(".final-subtitle"),
         { y: 40, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-        0.3
+        0.3,
       );
 
       // Animate description
@@ -358,28 +367,30 @@ const SixSenses = () => {
         finalSectionRef.current?.querySelector(".final-description"),
         { y: 30, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-        0.6
+        0.6,
       );
 
       // Animate features with stagger
-      const features = finalSectionRef.current?.querySelectorAll(".feature-item");
+      const features =
+        finalSectionRef.current?.querySelectorAll(".feature-item");
       if (features) {
         finalTl.fromTo(
           features,
           { x: -20, opacity: 0 },
           { x: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power2.out" },
-          0.9
+          0.9,
         );
       }
 
       // Animate CTA buttons
-      const ctaButtons = finalSectionRef.current?.querySelectorAll(".final-cta");
+      const ctaButtons =
+        finalSectionRef.current?.querySelectorAll(".final-cta");
       if (ctaButtons) {
         finalTl.fromTo(
           ctaButtons,
           { y: 30, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power2.out" },
-          1.2
+          1.2,
         );
       }
     }, finalSectionRef);
@@ -393,16 +404,16 @@ const SixSenses = () => {
       // Vietnamese version - highlight "7 ngày" and "hoạt động đặc biệt"
       const title = t.heroSection.title;
       const parts = title.split(/(7 ngày|hoạt động đặc biệt)/);
-      
+
       return parts.map((part, index) => {
         if (part === "7 ngày" || part === "hoạt động đặc biệt") {
           return (
-            <span 
-              key={index} 
+            <span
+              key={index}
               className="highlight-text italic text-[#0974B6] font-bold"
-              style={{ 
-                fontStyle: 'italic',
-                textShadow: '0 2px 4px rgba(9, 116, 182, 0.2)'
+              style={{
+                fontStyle: "italic",
+                textShadow: "0 2px 4px rgba(9, 116, 182, 0.2)",
               }}
             >
               {part}
@@ -415,17 +426,19 @@ const SixSenses = () => {
       // English version - highlight "7-day journey" and "signature activities"
       const title = t.heroSection.title;
       const parts = title.split(/(7-day journey|signature activities)/i);
-      
+
       return parts.map((part, index) => {
-        if (part.toLowerCase().includes("7-day journey") || 
-            part.toLowerCase().includes("signature activities")) {
+        if (
+          part.toLowerCase().includes("7-day journey") ||
+          part.toLowerCase().includes("signature activities")
+        ) {
           return (
-            <span 
-              key={index} 
+            <span
+              key={index}
               className="highlight-text italic text-[#0974B6] font-bold"
-              style={{ 
-                fontStyle: 'italic',
-                textShadow: '0 2px 4px rgba(9, 116, 182, 0.2)'
+              style={{
+                fontStyle: "italic",
+                textShadow: "0 2px 4px rgba(9, 116, 182, 0.2)",
               }}
             >
               {part}
@@ -440,35 +453,46 @@ const SixSenses = () => {
   return (
     <>
       {/* Intro Hero Section */}
-      <section className="relative py-20 md:py-32 overflow-hidden bg-gradient-to-br from-blue-50 via-white to-cyan-50" ref={introSectionRef}>
+      <section
+        className="relative py-20 md:py-32 overflow-hidden bg-gradient-to-br from-blue-50 via-white to-cyan-50"
+        ref={introSectionRef}
+      >
         <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
             {/* Badge */}
             <div className="intro-badge inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-full text-sm font-bold mb-8">
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              <svg
+                className="w-4 h-4 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
               </svg>
               {t.introSection.badge}
             </div>
-            
+
             {/* Title */}
             <h1 className="title-text text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
               {t.introSection.title}
             </h1>
-            
+
             {/* Subtitle */}
             <p className="title-text text-xl md:text-2xl text-blue-600 mb-8 max-w-3xl mx-auto">
               {t.introSection.subtitle}
             </p>
-            
+
             {/* Description */}
             <p className="title-text text-lg text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
               {t.introSection.description}
             </p>
-                    
           </div>
         </div>
-
 
         <div className="tam-nhin-container mb-16 max-w-7xl mx-auto px-4 md:px-2">
           <div className="grid-layout">
@@ -616,7 +640,7 @@ const SixSenses = () => {
             <h1 className="title-text text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-gray-900 leading-tight">
               {renderTitleWithHighlight()}
             </h1>
-            
+
             {/* Subtitle */}
             <p className="title-text text-xl md:text-2xl lg:text-3xl text-[#686967] mb-8 max-w-4xl mx-auto leading-relaxed">
               {t.heroSection.subtitle}
@@ -626,21 +650,27 @@ const SixSenses = () => {
 
         {/* Full Width Image Below */}
         <div className="w-full overflow-hidden">
-          <img
-            src="/images/Six.png"
-            alt="Six Senses Experience"
-          />
+          <img src="/images/Six.png" alt="Six Senses Experience" />
         </div>
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-b from-white to-blue-50" ref={finalSectionRef}>
-        
+      <section
+        className="py-20 md:py-32 bg-gradient-to-b from-white to-blue-50"
+        ref={finalSectionRef}
+      >
         {/* Wave Decoration */}
         <div className="mt-16">
-          <svg className="w-full h-12" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
-              fill="#0974B6" opacity="0.1"/>
+          <svg
+            className="w-full h-12"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+              fill="#0974B6"
+              opacity="0.1"
+            />
           </svg>
         </div>
       </section>

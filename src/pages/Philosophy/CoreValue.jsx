@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLanguage } from "../../contexts/LanguageContext";
@@ -7,389 +7,1502 @@ gsap.registerPlugin(ScrollTrigger);
 
 const CoreValue = () => {
   const { language } = useLanguage();
+  const [activeSection, setActiveSection] = useState("pillars");
+  const contentRef = useRef(null);
 
-  // Professional, passionate content about education
   const content = {
     vie: {
-      title: "Giá Trị Cốt Lõi",
-      subtitle: "Những nguyên tắc định hình nền tảng giáo dục Agua",
-      missionStatement: "Tại Agua International Education, chúng tôi tin rằng giáo dục không chỉ là việc truyền đạt kiến thức mà là quá trình khai phóng tiềm năng, xây dựng nhân cách, và chuẩn bị hành trang cho thế hệ lãnh đạo tương lai. Mỗi giá trị dưới đây đều được thiết kế để phát triển toàn diện con người - từ trí tuệ, tâm hồn đến kỹ năng sống.",
-      educationalPhilosophy: "Phương châm giáo dục của chúng tôi dựa trên nghiên cứu sư phạm hiện đại kết hợp với sự thấu hiểu sâu sắc về văn hóa Á Đông, tạo nên môi trường học tập nơi mỗi học viên được công nhận là một cá thể độc đáo với tiềm năng vô hạn.",
-      values: {
-        "Proactiveness - Chủ Động":
-          "Trong thế giới biến động không ngừng, tính chủ động không còn là lợi thế mà là yêu cầu bắt buộc. Chúng tôi đào tạo học viên trở thành những người tiên phong - dám nghĩ, dám làm, và dám chịu trách nhiệm. Bằng cách khuyến khích tư duy phản biện và kỹ năng ra quyết định, học viên Agua học cách nhận diện cơ hội, chủ động tạo lập tương lai thay vì thụ động chờ đợi. Chương trình giảng dạy được thiết kế để phát triển khả năng lãnh đạo tự thân, nơi mỗi cá nhân trở thành kiến trúc sư của chính hành trình học tập và phát triển của mình.",
-        "Inquisitiveness - Ham Học Hỏi":
-          "Niềm đam mê học tập suốt đời là động lực then chốt trong kỷ nguyên 4.0. Tại Agua, chúng tôi không chỉ dạy kiến thức mà còn nuôi dưỡng trí tò mò trí tuệ - khả năng đặt câu hỏi sâu sắc, tìm tòi khám phá, và duy trì tinh thần học hỏi không ngừng nghỉ. Phương pháp Socratic được áp dụng để phát triển tư duy phản biện, khuyến khích học viên không ngừng chất vấn, phân tích, và xây dựng hiểu biết cá nhân. Mỗi bài học là một hành trình khám phá, mỗi thắc mắc là một cánh cửa mở ra chân trời tri thức mới.",
-        "Integrity - Chính Trực":
-          "Nhân cách quan trọng hơn thành tích. Chúng tôi xây dựng nền tảng đạo đức vững chắc cho học viên thông qua việc thực hành tính chính trực trong mọi khía cạnh học tập và cuộc sống. Học viên Agua học cách sống trung thực với bản thân, tôn trọng sự thật, và dũng cảm bảo vệ các nguyên tắc đạo đức. Trong môi trường đề cao tính minh bạch và trách nhiệm, học viên phát triển thành những công dân toàn cầu có đạo đức, biết cân bằng giữa lợi ích cá nhân và trách nhiệm xã hội.",
-        "Creativity - Sáng Tạo":
-          "Sáng tạo không phải là tài năng thiên bẩm mà là kỹ năng có thể rèn luyện. Chúng tôi thiết kế không gian học tập khuyến khích tư duy 'outside the box', nơi sai lầm được xem như cơ hội học tập và ý tưởng táo bạo được đón nhận. Thông qua phương pháp học tập dự án và giải quyết vấn đề thực tế, học viên phát triển khả năng tư duy thiết kế, kết nối đa ngành, và tạo ra giải pháp đột phá. Tại Agua, mỗi học viên đều là nhà đổi mới tiềm năng, được trao quyền để biến ý tưởng thành giá trị thực tiễn.",
-        "Respect - Tôn Trọng":
-          "Giáo dục toàn diện bắt đầu từ sự tôn trọng - tôn trọng bản thân, tôn trọng người khác, và tôn trọng sự đa dạng. Chúng tôi xây dựng cộng đồng học tập nơi mọi cá nhân được lắng nghe, mọi quan điểm được tôn trọng, và mọi khác biệt được trân quý. Học viên Agua phát triển nhận thức đa văn hóa sâu sắc, hiểu biết về các giá trị truyền thống Á Đông đồng thời mở rộng tầm nhìn toàn cầu. Sự tôn trọng được thể hiện qua ngôn ngữ, hành vi, và thái độ học tập, tạo nền tảng cho hợp tác hiệu quả và phát triển bền vững.",
+      title: "Giá Trị Thực Tiễn Với AGUAER",
+      subtitle:
+        "Hệ thống giá trị được triển khai trong mọi khía cạnh hoạt động giáo dục",
+      intro:
+        "AGUA International Education được xây dựng trên nền tảng các giá trị thực tiễn có thể đo lường được. Mỗi giá trị không chỉ là lời cam kết mà còn được cụ thể hóa thành quy trình, hệ thống và chỉ số đánh giá rõ ràng.",
+
+      sections: {
+        pillars: {
+          id: "pillars",
+          title: "Trụ Cột Giá Trị Cốt Lõi",
+          subtitle:
+            "5 trụ cột tạo nên nền tảng giáo dục AGUA với các chỉ số đo lường cụ thể",
+          content: [
+            {
+              id: 1,
+              title: "Cá Nhân Hóa Tối Ưu",
+              description:
+                "Phát triển lộ trình học tập riêng biệt cho từng học viên dựa trên phân tích nhu cầu chuyên sâu, mục tiêu nghề nghiệp và năng lực hiện tại.",
+              keyMetrics: [
+                { label: "Phân tích SWOT chi tiết", value: "100% học viên" },
+                { label: "Tỷ lệ hoàn thành mục tiêu", value: "95%" },
+                { label: "Thời gian điều chỉnh lộ trình", value: "48 giờ" },
+                { label: "Số buổi coaching 1:1", value: "8+ buổi/khóa" },
+              ],
+              processes: [
+                "Đánh giá năng lực đầu vào theo khung CEFR và khung năng lực chuyên môn",
+                "Xây dựng lộ trình học tập cá nhân hóa với timeline cụ thể",
+                "Hệ thống mentor 1:1 với tracking tiến độ chi tiết",
+                "Portfolio học tập số hóa với đánh giá định kỳ 4 tuần/lần",
+              ],
+              tools: [
+                "Hệ thống Learning Management System tích hợp AI",
+                "Ứng dụng theo dõi tiến độ thời gian thực",
+                "Công cụ đánh giá năng lực đa chiều",
+                "Dashboard báo cáo cá nhân hóa tự động",
+              ],
+            },
+            {
+              id: 2,
+              title: "Kết Quả Đo Lường Được",
+              description:
+                "Xây dựng hệ thống chỉ số đánh giá toàn diện từ kết quả học tập đến phát triển kỹ năng và thành công nghề nghiệp.",
+              keyMetrics: [
+                { label: "Số KPI đánh giá/khóa", value: "15 KPI" },
+                { label: "Độ chính xác dự đoán", value: "96.3%" },
+                { label: "Tỷ lệ đạt mục tiêu", value: "92%" },
+                { label: "Thời gian phản hồi", value: "24 giờ" },
+              ],
+              processes: [
+                "Đánh giá định kỳ 4 tuần/lần với báo cáo chi tiết 12 chỉ số",
+                "Hệ thống tracking năng lực theo thời gian thực",
+                "Đo lường ROI học tập cho từng học viên",
+                "Báo cáo tổng hợp hiệu quả đào tạo hàng quý",
+              ],
+              tools: [
+                "Hệ thống phân tích dữ liệu học tập tích hợp",
+                "Công cụ đánh giá năng lực tự động hóa",
+                "Phần mềm tracking tiến độ và hiệu suất",
+                "Hệ thống báo cáo định dạng dashboard",
+              ],
+            },
+            {
+              id: 3,
+              title: "Kết Nối Doanh Nghiệp Chiến Lược",
+              description:
+                "Xây dựng mạng lưới đối tác doanh nghiệp để cung cấp trải nghiệm thực tế và cơ hội nghề nghiệp.",
+              keyMetrics: [
+                { label: "Doanh nghiệp đối tác", value: "75+" },
+                { label: "Việc làm sau 90 ngày", value: "85%" },
+                { label: "Cơ hội thực tập/năm", value: "150+" },
+                { label: "Tuyển dụng bởi đối tác", value: "65%" },
+              ],
+              processes: [
+                "Chương trình Company Visit và Job Shadowing hàng tháng",
+                "Hệ thống mentorship từ leader các tập đoàn",
+                "Dự án thực tế giải quyết case study của doanh nghiệp",
+                "Career Fair độc quyền 2 lần/năm với đối tác",
+              ],
+              tools: [
+                "Cổng thông tin việc làm dành riêng cho học viên AGUA",
+                "Hệ thống matching năng lực - vị trí tuyển dụng AI",
+                "Platform kết nối học viên - mentor doanh nghiệp",
+                "Cơ sở dữ liệu 500+ case study thực tế",
+              ],
+            },
+            {
+              id: 4,
+              title: "Công Nghệ Giáo Dục Tiên Tiến",
+              description:
+                "Áp dụng công nghệ hiện đại để tối ưu hóa trải nghiệm học tập và nâng cao hiệu quả đào tạo.",
+              keyMetrics: [
+                { label: "Ứng dụng công nghệ 4.0", value: "100%" },
+                { label: "Đầu tư R&D", value: "18% doanh thu" },
+                { label: "Cải tiến phương pháp/năm", value: "30%" },
+                { label: "Độ hài lòng công nghệ", value: "4.7/5.0" },
+              ],
+              processes: [
+                "Nghiên cứu và phát triển phương pháp giảng dạy mới hàng quý",
+                "Triển khai hệ thống học tập thích ứng (Adaptive Learning)",
+                "Ứng dụng AI trong phân tích nhu cầu và cá nhân hóa",
+                "Đào tạo đội ngũ về công nghệ giáo dục mới hàng năm",
+              ],
+              tools: [
+                "Hệ thống LMS tích hợp AI và machine learning",
+                "Thư viện học liệu số với 10,000+ tài nguyên",
+                "Ứng dụng mobile learning với tính năng offline",
+                "Công cụ virtual classroom và collaboration",
+              ],
+            },
+            {
+              id: 5,
+              title: "Hệ Sinh Thái Hỗ Trợ Toàn Diện",
+              description:
+                "Xây dựng môi trường hỗ trợ đa chiều từ học tập đến phát triển nghề nghiệp và mạng lưới kết nối.",
+              keyMetrics: [
+                { label: "Cộng đồng cựu học viên", value: "2,500+" },
+                { label: "Tham gia hoạt động alumni", value: "88%" },
+                { label: "Sự kiện networking/năm", value: "36+" },
+                { label: "Net Promoter Score", value: "72" },
+              ],
+              processes: [
+                "Chương trình alumni engagement với các cấp độ tham gia",
+                "Hệ thống mentorship ngược (alumni mentor thế hệ sau)",
+                "Hỗ trợ career transition và upskilling trọn đời",
+                "Mạng lưới kết nối chuyên ngành theo nhóm ngành nghề",
+              ],
+              tools: [
+                "Platform cộng đồng alumni toàn cầu",
+                "Hệ thống đăng ký và quản lý sự kiện chuyên nghiệp",
+                "Cổng thông tin và tài nguyên hỗ trợ nghề nghiệp",
+                "Hệ thống theo dõi và hỗ trợ cựu học viên tự động",
+              ],
+            },
+          ],
+        },
+        framework: {
+          id: "framework",
+          title: "Khung Vận Hành Chuẩn Hóa",
+          subtitle:
+            "Hệ thống quản lý và vận hành đảm bảo chất lượng đồng nhất và hiệu quả tối ưu",
+          content: [
+            {
+              component: "Quản Trị Chất Lượng",
+              description:
+                "Hệ thống quản lý chất lượng toàn diện theo tiêu chuẩn ISO 9001:2015",
+              standards: [
+                "Quy trình đánh giá đầu vào chuẩn hóa với 7 bước xác minh",
+                "Hệ thống đo lường và cải tiến liên tục theo chu trình PDCA",
+                "Kiểm soát tài liệu và hồ sơ điện tử với mã hóa tự động",
+                "Đánh giá nội bộ hàng quý và đánh giá bên ngoài định kỳ",
+              ],
+              keyFeatures: [
+                "Triển khai trên 100% các phòng ban",
+                "Đạt chứng chỉ ISO từ năm 2020",
+                "3 lần đánh giá giám sát hàng năm",
+                "Tỷ lệ tuân thủ quy trình: 98.5%",
+              ],
+            },
+            {
+              component: "Phát Triển Đội Ngũ",
+              description:
+                "Chương trình đào tạo và phát triển chuyên môn cho đội ngũ",
+              standards: [
+                "Yêu cầu chứng chỉ giảng dạy quốc tế (CELTA, TESOL, DELTA)",
+                "Đào tạo nội bộ hàng tháng về phương pháp giảng dạy mới",
+                "Chương trình mentoring và coaching nội bộ có cấu trúc",
+                "Đánh giá năng lực và phát triển nghề nghiệp 6 tháng/lần",
+              ],
+              keyFeatures: [
+                "Đội ngũ 120+ chuyên gia có chứng chỉ quốc tế",
+                "Chi phí đào tạo/nhân sự: $1,500/năm",
+                "Tỷ lệ giữ chân nhân tài: 92%",
+                "Chương trình leadership pipeline đa cấp",
+              ],
+            },
+            {
+              component: "Quản Lý Tài Nguyên",
+              description: "Hệ thống quản lý và tối ưu hóa tài nguyên giáo dục",
+              standards: [
+                "Thư viện học liệu số chuẩn hóa với phân loại theo cấp độ",
+                "Hệ thống quản lý phòng học và thiết bị thông minh",
+                "Cơ sở dữ liệu case study và bài giảng có hệ thống",
+                "Hệ thống bảo trì và nâng cấp công nghệ định kỳ",
+              ],
+              keyFeatures: [
+                "10,000+ tài nguyên học liệu số",
+                "Hệ thống 15 phòng học hiện đại",
+                "Tỷ lệ sử dụng tài nguyên: 85%",
+                "Thời gian bảo trì trung bình: 4 giờ",
+              ],
+            },
+            {
+              component: "Đo Lường Hiệu Quả",
+              description: "Hệ thống đánh giá và báo cáo hiệu quả đa chiều",
+              standards: [
+                "Bộ chỉ số KPI toàn diện cho từng phòng ban (25+ chỉ số)",
+                "Hệ thống báo cáo real-time dashboard tự động cập nhật",
+                "Phân tích dữ liệu và dự báo hiệu quả bằng AI",
+                "Báo cáo tác động xã hội và ROI theo định kỳ",
+              ],
+              keyFeatures: [
+                "Tần suất báo cáo: hàng ngày/tuần/tháng/quý",
+                "Độ chính xác dữ liệu: 99.8%",
+                "Thời gian xử lý báo cáo: 5 phút",
+                "Số lượng dashboard theo dõi: 18",
+              ],
+            },
+          ],
+        },
+        quality: {
+          id: "quality",
+          title: "Hệ Thống Đảm Bảo Chất Lượng",
+          subtitle:
+            "Các cơ chế và quy trình đảm bảo duy trì và nâng cao chất lượng dịch vụ",
+          content: [
+            {
+              mechanism: "Đánh Giá Định Kỳ",
+              description: "Hệ thống đánh giá toàn diện và có cấu trúc",
+              details: [
+                "Đánh giá học viên 4 tuần/lần với 15 chỉ số cụ thể",
+                "Khảo sát hài lòng tổng thể mỗi khóa học với 30+ tiêu chí",
+                "Đánh giá nội bộ hàng quý theo tiêu chuẩn ISO 9001:2015",
+                "Đánh giá bên ngoài bởi 3 tổ chức kiểm định độc lập",
+                "Đánh giá giữa kỳ và cuối kỳ với rubric chi tiết",
+                "Phân tích dữ liệu học tập hàng tháng",
+              ],
+              metrics: [
+                "Tần suất đánh giá: 4 tuần/lần",
+                "Tỷ lệ phản hồi học viên: 95%",
+                "Độ tin cậy đánh giá: 0.92 Cronbach's Alpha",
+                "Thời gian xử lý kết quả: 24 giờ",
+              ],
+            },
+            {
+              mechanism: "Cải Tiến Liên Tục",
+              description: "Quy trình cải tiến dựa trên dữ liệu và phản hồi",
+              details: [
+                "Hệ thống thu thập và phân tích phản hồi tự động real-time",
+                "Quy trình xử lý khiếu nại trong 24 giờ với 5 cấp độ",
+                "Ứng dụng phương pháp Kaizen trong cải tiến dịch vụ",
+                "Đầu tư R&D 18% doanh thu dựa trên dữ liệu và nhu cầu thị trường",
+                "Cập nhật chương trình đào tạo 6 tháng/lần",
+                "Hội đồng chất lượng họp hàng tháng",
+              ],
+              metrics: [
+                "Số cải tiến/năm: 150+",
+                "Thời gian triển khai cải tiến: 2-4 tuần",
+                "Tỷ lệ cải tiến thành công: 85%",
+                "ROI từ cải tiến: 3.2x",
+              ],
+            },
+            {
+              mechanism: "Minh Bạch Thông Tin",
+              description: "Cơ chế công khai và minh bạch thông tin",
+              details: [
+                "Công khai 100% tiêu chuẩn đánh giá và phương pháp tính điểm",
+                "Báo cáo kết quả học tập chi tiết và dễ hiểu với infographic",
+                "Chia sẻ dữ liệu thành công và 500+ case study thực tế",
+                "Cơ chế phản hồi và giải trình minh bạch 2 chiều",
+                "Hệ thống theo dõi tiến độ công khai cho phụ huynh",
+                "Báo cáo tác động xã hội hàng năm",
+              ],
+              metrics: [
+                "Độ minh bạch thông tin: 95%",
+                "Tỷ lệ hài lòng về minh bạch: 4.8/5.0",
+                "Tần suất cập nhật thông tin: hàng tuần",
+                "Số kênh thông tin: 8 (web, app, email, SMS, v.v.)",
+              ],
+            },
+          ],
+        },
+        commitments: {
+          id: "commitments",
+          title: "Cam Kết Với Học Viên",
+          subtitle:
+            "Những cam kết cụ thể, có thể đo lường và có hợp đồng ràng buộc",
+          content: [
+            {
+              commitment: "Cam Kết Kết Quả Đầu Ra",
+              details:
+                "Hoàn 100% học phí nếu không đạt đầu ra đã thỏa thuận trong hợp đồng đào tạo",
+              specifics: [
+                "Xác định rõ 5-7 mục tiêu học tập cụ thể trong hợp đồng",
+                "Đo lường bằng bài đánh giá chuẩn hóa và portfolio",
+                "Thời gian đánh giá: sau 30 ngày kết thúc khóa học",
+                "Quy trình hoàn tiền trong 15 ngày làm việc",
+              ],
+              successRate: "98.5% học viên đạt mục tiêu",
+            },
+            {
+              commitment: "Hỗ Trợ Toàn Diện 24/7",
+              details:
+                "Dịch vụ hỗ trợ đa kênh với thời gian phản hồi tối đa 2 giờ",
+              specifics: [
+                "Hotline hoạt động 24/7 với đội ngũ chuyên môn",
+                "Hỗ trợ qua chat, email, video call",
+                "Hệ thống ticket tracking tự động",
+                "Đội ngũ hỗ trợ kỹ thuật và học thuật chuyên biệt",
+              ],
+              successRate: "99.2% phản hồi trong 2 giờ",
+            },
+            {
+              commitment: "Cập Nhật Kiến Thức Trọn Đời",
+              details:
+                "Truy cập miễn phí vào các cập nhật chương trình và tài nguyên trong 24 tháng sau tốt nghiệp",
+              specifics: [
+                "Access to all updated course materials and resources",
+                "Tham gia workshop cập nhật hàng quý",
+                "Nhận bản tin chuyên môn hàng tháng",
+                "Tham gia cộng đồng học tập liên tục",
+              ],
+              successRate: "45% cựu học viên tham gia thường xuyên",
+            },
+            {
+              commitment: "Kết Nối Nghề Nghiệp Đảm Bảo",
+              details:
+                "Đảm bảo ít nhất 3 cơ hội phỏng vấn với đối tác tuyển dụng trong lĩnh vực mục tiêu",
+              specifics: [
+                "Matching profile với yêu cầu công việc",
+                "Training phỏng vấn và xây dựng CV",
+                "Theo dõi và hỗ trợ sau phỏng vấn",
+                "Đánh giá và tư vấn cải thiện",
+              ],
+              successRate: "85% có việc làm trong 90 ngày",
+            },
+            {
+              commitment: "Phát Triển Dài Hạn",
+              details:
+                "Chương trình mentoring miễn phí 6 tháng sau khóa học và các workshop định kỳ hàng quý",
+              specifics: [
+                "1 mentor chuyên môn hỗ trợ 6 tháng",
+                "4 workshop phát triển kỹ năng/năm",
+                "Access to exclusive career resources",
+                "Tham gia mạng lưới alumni toàn cầu",
+              ],
+              successRate: "92% học viên hài lòng với mentoring",
+            },
+          ],
+        },
+        metrics: {
+          id: "metrics",
+          title: "Chỉ Số Hiệu Quả & Tài Chính",
+          subtitle:
+            "Các chỉ số đo lường hiệu quả hoạt động, đầu tư và tác động",
+          content: [
+            {
+              category: "Hiệu Quả Học Tập",
+              items: [
+                {
+                  metric: "Tỷ lệ hoàn thành khóa học",
+                  value: "96%",
+                  trend: "+2% yoy",
+                },
+                {
+                  metric: "Điểm đánh giá cuối khóa",
+                  value: "8.7/10",
+                  trend: "+0.3 yoy",
+                },
+                {
+                  metric: "Tỷ lệ học viên quay lại",
+                  value: "48%",
+                  trend: "+5% yoy",
+                },
+                {
+                  metric: "Thời gian học trung bình/ngày",
+                  value: "2.5 giờ",
+                  trend: "stable",
+                },
+                {
+                  metric: "Tỷ lệ tương tác bài giảng",
+                  value: "85%",
+                  trend: "+8% yoy",
+                },
+                {
+                  metric: "Độ hài lòng tổng thể",
+                  value: "4.8/5.0",
+                  trend: "+0.2 yoy",
+                },
+              ],
+              description:
+                "Chỉ số đo lường hiệu quả học tập và sự hài lòng của học viên",
+            },
+            {
+              category: "Hiệu Quả Đầu Tư",
+              items: [
+                {
+                  metric: "ROI trung bình cho học viên",
+                  value: "4.2x",
+                  trend: "+0.3x yoy",
+                },
+                {
+                  metric: "Thời gian hoàn vốn trung bình",
+                  value: "14 tháng",
+                  trend: "-2 tháng yoy",
+                },
+                {
+                  metric: "Chi phí thu hút học viên mới",
+                  value: "$850",
+                  trend: "-$50 yoy",
+                },
+                {
+                  metric: "Lifetime Value học viên",
+                  value: "$12,500",
+                  trend: "+$1,200 yoy",
+                },
+                { metric: "Tỷ lệ chuyển đổi", value: "35%", trend: "+3% yoy" },
+                {
+                  metric: "Chi phí phục vụ học viên",
+                  value: "$420",
+                  trend: "-$30 yoy",
+                },
+              ],
+              description: "Chỉ số tài chính và hiệu quả đầu tư",
+            },
+            {
+              category: "Phát Triển Bền Vững",
+              items: [
+                {
+                  metric: "Tốc độ tăng trưởng doanh thu",
+                  value: "35%/năm",
+                  trend: "+5% yoy",
+                },
+                {
+                  metric: "Tỷ lệ tái đầu tư",
+                  value: "40% lợi nhuận",
+                  trend: "stable",
+                },
+                {
+                  metric: "Quy mô đội ngũ chuyên môn",
+                  value: "120+ người",
+                  trend: "+15% yoy",
+                },
+                { metric: "Số khóa học mới/năm", value: "8", trend: "+2 yoy" },
+                {
+                  metric: "Tỷ lệ giữ chân nhân tài",
+                  value: "92%",
+                  trend: "+3% yoy",
+                },
+                {
+                  metric: "Đầu tư R&D",
+                  value: "18% doanh thu",
+                  trend: "+2% yoy",
+                },
+              ],
+              description: "Chỉ số phát triển tổ chức và bền vững",
+            },
+            {
+              category: "Tác Động Xã Hội",
+              items: [
+                {
+                  metric: "Học viên tốt nghiệp/năm",
+                  value: "1,200+",
+                  trend: "+20% yoy",
+                },
+                {
+                  metric: "Việc làm tạo ra/năm",
+                  value: "850+",
+                  trend: "+15% yoy",
+                },
+                {
+                  metric: "Đối tác doanh nghiệp",
+                  value: "75+",
+                  trend: "+12 yoy",
+                },
+                {
+                  metric: "Học bổng cung cấp/năm",
+                  value: "$150,000",
+                  trend: "+25% yoy",
+                },
+                {
+                  metric: "Sự kiện cộng đồng/năm",
+                  value: "36+",
+                  trend: "+5 yoy",
+                },
+                { metric: "Net Promoter Score", value: "72", trend: "+5 yoy" },
+              ],
+              description: "Chỉ số tác động đến cộng đồng và xã hội",
+            },
+          ],
+        },
       },
-      educationalImpact: "Các giá trị này không tồn tại riêng lẻ mà tương hỗ lẫn nhau, tạo thành hệ sinh thái giáo dục toàn diện. Khi được tích hợp vào chương trình giảng dạy và văn hóa học đường, chúng trở thành nền tảng vững chắc cho sự phát triển trí tuệ, nhân cách và kỹ năng sống - chuẩn bị cho học viên không chỉ thành công trong học tập mà còn thịnh vượng trong cuộc sống.",
-      images: {
-        "Proactiveness - Chủ Động": "/images/proactive.jpg",
-        "Inquisitiveness - Ham Học Hỏi": "/images/learning.jpg",
-        "Integrity - Chính Trực": "/images/integrity.jpg",
-        "Creativity - Sáng Tạo": "/images/creativity.jpg",
-        "Respect - Tôn Trọng": "/images/respect.jpg",
-      },
+
+      menuItems: [
+        { id: "pillars", label: "Trụ Cột Giá Trị" },
+        { id: "framework", label: "Khung Vận Hành" },
+        { id: "quality", label: "Đảm Bảo Chất Lượng" },
+        { id: "commitments", label: "Cam Kết Học Viên" },
+        { id: "metrics", label: "Chỉ Số Hiệu Quả" },
+      ],
+
+      conclusion:
+        "Hệ thống giá trị của AGUA được thiết kế như một thể thống nhất - từ chiến lược đến vận hành, từ con người đến công nghệ. Mỗi thành phần đều được đo lường bằng chỉ số cụ thể, đánh giá định kỳ và cải tiến liên tục. Chúng tôi không chỉ cam kết mà còn chứng minh bằng kết quả thực tế, tạo ra tác động tích cực và bền vững cho từng học viên và toàn bộ cộng đồng.",
     },
+
     en: {
-      title: "Core Values",
-      subtitle: "Principles that Define Agua's Educational Foundation",
-      missionStatement: "At Agua International Education, we believe education transcends knowledge transmission—it is a transformative journey of unleashing potential, building character, and equipping future leaders. Each value below is meticulously designed to cultivate holistic human development—intellectual, emotional, and practical.",
-      educationalPhilosophy: "Our educational approach integrates modern pedagogical research with deep cultural understanding of Eastern traditions, creating a learning environment where each student is recognized as a unique individual with boundless potential.",
-      values: {
-        Proactiveness:
-          "In an ever-changing world, proactiveness is no longer an advantage but a necessity. We cultivate students to become pioneers—thoughtful, decisive, and accountable. Through critical thinking and decision-making skills, Agua learners identify opportunities and actively shape their futures. Our curriculum develops self-leadership, empowering each individual to architect their own learning journey and personal growth.",
-        Inquisitiveness:
-          "Lifelong learning passion is crucial in the 4.0 era. At Agua, we teach knowledge while nurturing intellectual curiosity—the ability to ask profound questions, explore relentlessly, and maintain an insatiable learning spirit. The Socratic method fosters critical thinking, encouraging continuous inquiry, analysis, and personal understanding. Every lesson is an exploration, every question a gateway to new horizons.",
-        Integrity:
-          "Character matters more than achievement. We build strong ethical foundations through practicing integrity in all learning and life aspects. Agua students learn honesty, truth respect, and moral courage. In our transparent, accountable environment, students evolve into ethical global citizens who balance personal interests with social responsibility.",
-        Creativity:
-          "Creativity is not innate talent but a trainable skill. We design learning spaces encouraging 'outside the box' thinking, where mistakes become learning opportunities and bold ideas are welcomed. Through project-based learning and real-world problem-solving, students develop design thinking, interdisciplinary connections, and breakthrough solutions. At Agua, every student is a potential innovator empowered to transform ideas into practical value.",
-        Respect:
-          "Holistic education begins with respect—for self, others, and diversity. We build a learning community where every voice is heard, every perspective valued, and every difference cherished. Agua students develop deep multicultural awareness, understanding Eastern traditional values while embracing global perspectives. Respect manifests through language, behavior, and learning attitudes, forming foundations for effective collaboration and sustainable development.",
+      title: "AGUAER Practical Values",
+      subtitle:
+        "A value system implemented across all aspects of educational operations",
+      intro:
+        "AGUA International Education is built on practical, measurable values. Each value is not just a commitment but is operationalized into clear processes, systems, and evaluation metrics.",
+
+      sections: {
+        pillars: {
+          id: "pillars",
+          title: "Core Value Pillars",
+          subtitle:
+            "5 pillars forming AGUA's educational foundation with specific measurement metrics",
+          content: [
+            {
+              id: 1,
+              title: "Optimal Personalization",
+              description:
+                "Develop individualized learning pathways based on in-depth needs analysis, career goals, and current competencies.",
+              keyMetrics: [
+                { label: "Detailed SWOT analysis", value: "100% students" },
+                { label: "Goal achievement rate", value: "95%" },
+                { label: "Pathway adjustment time", value: "48 hours" },
+                { label: "1:1 coaching sessions", value: "8+ sessions/course" },
+              ],
+              processes: [
+                "Initial competency assessment based on CEFR and professional frameworks",
+                "Personalized learning pathway development with specific timelines",
+                "1:1 mentor system with detailed progress tracking",
+                "Digital learning portfolio with 4-week periodic evaluations",
+              ],
+              tools: [
+                "AI-integrated Learning Management System",
+                "Real-time progress tracking application",
+                "Multidimensional competency assessment tool",
+                "Automated personalized reporting dashboard",
+              ],
+            },
+            {
+              id: 2,
+              title: "Measurable Results",
+              description:
+                "Build a comprehensive evaluation system covering learning outcomes, skill development, and career success.",
+              keyMetrics: [
+                { label: "Evaluation KPIs/course", value: "15 KPIs" },
+                { label: "Prediction accuracy", value: "96.3%" },
+                { label: "Goal achievement rate", value: "92%" },
+                { label: "Feedback time", value: "24 hours" },
+              ],
+              processes: [
+                "4-week periodic evaluations with 12-indicator detailed reports",
+                "Real-time competency tracking system",
+                "Learning ROI measurement per student",
+                "Quarterly comprehensive training effectiveness reports",
+              ],
+              tools: [
+                "Integrated learning data analysis system",
+                "Automated competency assessment tools",
+                "Progress and performance tracking software",
+                "Dashboard-formatted reporting system",
+              ],
+            },
+            {
+              id: 3,
+              title: "Strategic Corporate Connections",
+              description:
+                "Build a network of corporate partners to provide real-world experiences and career opportunities.",
+              keyMetrics: [
+                { label: "Corporate partners", value: "75+" },
+                { label: "Employment within 90 days", value: "85%" },
+                { label: "Internship opportunities/year", value: "150+" },
+                { label: "Hired by partners", value: "65%" },
+              ],
+              processes: [
+                "Monthly Company Visit and Job Shadowing programs",
+                "Mentorship system from corporate leaders",
+                "Real projects solving actual business case studies",
+                "Exclusive Career Fair twice annually with partners",
+              ],
+              tools: [
+                "Dedicated job portal for AGUA students",
+                "AI-powered competency-job position matching system",
+                "Student-enterprise mentor connection platform",
+                "Database of 500+ real case studies",
+              ],
+            },
+            {
+              id: 4,
+              title: "Advanced Educational Technology",
+              description:
+                "Apply modern technology to optimize learning experiences and enhance training effectiveness.",
+              keyMetrics: [
+                { label: "Education 4.0 adoption", value: "100%" },
+                { label: "R&D investment", value: "18% revenue" },
+                { label: "Methodology improvement/year", value: "30%" },
+                { label: "Tech satisfaction score", value: "4.7/5.0" },
+              ],
+              processes: [
+                "Quarterly research and development of new teaching methods",
+                "Implementation of Adaptive Learning systems",
+                "Application of AI in needs analysis and personalization",
+                "Annual training on new educational technologies",
+              ],
+              tools: [
+                "AI and machine learning integrated LMS",
+                "Digital learning library with 10,000+ resources",
+                "Mobile learning app with offline features",
+                "Virtual classroom and collaboration tools",
+              ],
+            },
+            {
+              id: 5,
+              title: "Comprehensive Support Ecosystem",
+              description:
+                "Build a multi-dimensional support environment from learning to career development and networking.",
+              keyMetrics: [
+                { label: "Alumni community", value: "2,500+" },
+                { label: "Alumni activity participation", value: "88%" },
+                { label: "Networking events/year", value: "36+" },
+                { label: "Net Promoter Score", value: "72" },
+              ],
+              processes: [
+                "Alumni engagement program with multiple participation levels",
+                "Reverse mentorship system (alumni mentor new generations)",
+                "Lifetime career transition and upskilling support",
+                "Industry-specific networking groups by professional field",
+              ],
+              tools: [
+                "Global alumni community platform",
+                "Professional event registration and management system",
+                "Career support resource portal",
+                "Automated alumni tracking and support system",
+              ],
+            },
+          ],
+        },
+        framework: {
+          id: "framework",
+          title: "Standardized Operational Framework",
+          subtitle:
+            "Management and operation systems ensuring consistent quality and optimal efficiency",
+          content: [
+            {
+              component: "Quality Governance",
+              description:
+                "Comprehensive quality management system ISO 9001:2015 certified",
+              standards: [
+                "Standardized admission assessment process with 7 verification steps",
+                "Continuous measurement and improvement PDCA cycle system",
+                "Electronic document and record control with automatic coding",
+                "Quarterly internal audits and periodic external audits",
+              ],
+              keyFeatures: [
+                "Implemented across 100% of departments",
+                "ISO certified since 2020",
+                "3 surveillance audits annually",
+                "Process compliance rate: 98.5%",
+              ],
+            },
+            {
+              component: "Team Development",
+              description:
+                "Professional training and development program for staff",
+              standards: [
+                "International teaching certification requirements (CELTA, TESOL, DELTA)",
+                "Monthly internal training on new teaching methodologies",
+                "Structured internal mentoring and coaching programs",
+                "6-month competency assessment and career development cycles",
+              ],
+              keyFeatures: [
+                "120+ certified professional team members",
+                "Training cost per staff: $1,500/year",
+                "Talent retention rate: 92%",
+                "Multi-level leadership pipeline program",
+              ],
+            },
+            {
+              component: "Resource Management",
+              description:
+                "Educational resource management and optimization system",
+              standards: [
+                "Standardized digital learning library with level-based classification",
+                "Smart classroom and equipment management system",
+                "Systematic case study and lecture material database",
+                "Regular technology maintenance and upgrade system",
+              ],
+              keyFeatures: [
+                "10,000+ digital learning resources",
+                "15 modern classroom facilities",
+                "Resource utilization rate: 85%",
+                "Average maintenance time: 4 hours",
+              ],
+            },
+            {
+              component: "Effectiveness Measurement",
+              description:
+                "Multidimensional effectiveness evaluation and reporting system",
+              standards: [
+                "Comprehensive KPI set for each department (25+ indicators)",
+                "Real-time dashboard reporting system with automatic updates",
+                "AI-powered data analysis and effectiveness forecasting",
+                "Periodic social impact and ROI reporting",
+              ],
+              keyFeatures: [
+                "Reporting frequency: daily/weekly/monthly/quarterly",
+                "Data accuracy: 99.8%",
+                "Report processing time: 5 minutes",
+                "Number of monitoring dashboards: 18",
+              ],
+            },
+          ],
+        },
+        quality: {
+          id: "quality",
+          title: "Quality Assurance System",
+          subtitle:
+            "Mechanisms and processes ensuring service quality maintenance and enhancement",
+          content: [
+            {
+              mechanism: "Periodic Evaluation",
+              description: "Comprehensive and structured evaluation system",
+              details: [
+                "4-week student evaluations with 15 specific indicators",
+                "Overall course satisfaction survey with 30+ criteria",
+                "Quarterly internal audits per ISO 9001:2015 standards",
+                "External audits by 3 independent accreditation bodies",
+                "Mid-term and final assessments with detailed rubrics",
+                "Monthly learning data analysis",
+              ],
+              metrics: [
+                "Evaluation frequency: every 4 weeks",
+                "Student response rate: 95%",
+                "Evaluation reliability: 0.92 Cronbach's Alpha",
+                "Result processing time: 24 hours",
+              ],
+            },
+            {
+              mechanism: "Continuous Improvement",
+              description: "Data and feedback-driven improvement process",
+              details: [
+                "Real-time automatic feedback collection and analysis system",
+                "24-hour complaint resolution process with 5 escalation levels",
+                "Kaizen methodology application in service improvement",
+                "18% revenue R&D investment based on data and market needs",
+                "Training program updates every 6 months",
+                "Monthly quality council meetings",
+              ],
+              metrics: [
+                "Improvements/year: 150+",
+                "Improvement implementation time: 2-4 weeks",
+                "Improvement success rate: 85%",
+                "Improvement ROI: 3.2x",
+              ],
+            },
+            {
+              mechanism: "Information Transparency",
+              description: "Transparent information disclosure mechanisms",
+              details: [
+                "100% disclosure of evaluation standards and scoring methods",
+                "Detailed and understandable learning outcome reports with infographics",
+                "Sharing of success data and 500+ real case studies",
+                "Two-way transparent feedback and accountability mechanisms",
+                "Public progress tracking system for parents",
+                "Annual social impact reports",
+              ],
+              metrics: [
+                "Information transparency: 95%",
+                "Transparency satisfaction: 4.8/5.0",
+                "Information update frequency: weekly",
+                "Number of information channels: 8 (web, app, email, SMS, etc.)",
+              ],
+            },
+          ],
+        },
+        commitments: {
+          id: "commitments",
+          title: "Student Commitments",
+          subtitle:
+            "Specific, measurable, and contract-bound commitments to our students",
+          content: [
+            {
+              commitment: "Results Guarantee",
+              details:
+                "100% tuition refund if agreed training outcomes are not achieved per contract",
+              specifics: [
+                "Clearly defined 5-7 specific learning objectives in contract",
+                "Measurement through standardized assessments and portfolio",
+                "Evaluation timeframe: 30 days after course completion",
+                "Refund process within 15 working days",
+              ],
+              successRate: "98.5% students achieve objectives",
+            },
+            {
+              commitment: "24/7 Comprehensive Support",
+              details:
+                "Multi-channel support service with maximum 2-hour response time",
+              specifics: [
+                "24/7 hotline with professional support team",
+                "Support via chat, email, video call",
+                "Automatic ticket tracking system",
+                "Dedicated technical and academic support teams",
+              ],
+              successRate: "99.2% responses within 2 hours",
+            },
+            {
+              commitment: "Lifetime Knowledge Updates",
+              details:
+                "Free access to program updates and resources for 24 months post-graduation",
+              specifics: [
+                "Access to all updated course materials and resources",
+                "Quarterly update workshops",
+                "Monthly professional newsletters",
+                "Continuous learning community participation",
+              ],
+              successRate: "45% alumni participate regularly",
+            },
+            {
+              commitment: "Guaranteed Career Connections",
+              details:
+                "Guaranteed minimum 3 interview opportunities with hiring partners in target field",
+              specifics: [
+                "Profile matching with job requirements",
+                "Interview training and CV building",
+                "Post-interview follow-up and support",
+                "Evaluation and improvement consultation",
+              ],
+              successRate: "85% employed within 90 days",
+            },
+            {
+              commitment: "Long-term Development",
+              details:
+                "6 months free mentoring post-course and quarterly workshops",
+              specifics: [
+                "1 professional mentor supporting for 6 months",
+                "4 skill development workshops/year",
+                "Access to exclusive career resources",
+                "Participation in global alumni network",
+              ],
+              successRate: "92% student satisfaction with mentoring",
+            },
+          ],
+        },
+        metrics: {
+          id: "metrics",
+          title: "Effectiveness & Financial Metrics",
+          subtitle:
+            "Metrics measuring operational effectiveness, investment, and impact",
+          content: [
+            {
+              category: "Learning Effectiveness",
+              items: [
+                {
+                  metric: "Course completion rate",
+                  value: "96%",
+                  trend: "+2% yoy",
+                },
+                {
+                  metric: "Final assessment score",
+                  value: "8.7/10",
+                  trend: "+0.3 yoy",
+                },
+                {
+                  metric: "Returning student rate",
+                  value: "48%",
+                  trend: "+5% yoy",
+                },
+                {
+                  metric: "Average daily study time",
+                  value: "2.5 hours",
+                  trend: "stable",
+                },
+                {
+                  metric: "Lesson engagement rate",
+                  value: "85%",
+                  trend: "+8% yoy",
+                },
+                {
+                  metric: "Overall satisfaction",
+                  value: "4.8/5.0",
+                  trend: "+0.2 yoy",
+                },
+              ],
+              description:
+                "Metrics measuring learning effectiveness and student satisfaction",
+            },
+            {
+              category: "Investment Effectiveness",
+              items: [
+                {
+                  metric: "Average student ROI",
+                  value: "4.2x",
+                  trend: "+0.3x yoy",
+                },
+                {
+                  metric: "Average payback period",
+                  value: "14 months",
+                  trend: "-2 months yoy",
+                },
+                {
+                  metric: "Student acquisition cost",
+                  value: "$850",
+                  trend: "-$50 yoy",
+                },
+                {
+                  metric: "Student Lifetime Value",
+                  value: "$12,500",
+                  trend: "+$1,200 yoy",
+                },
+                { metric: "Conversion rate", value: "35%", trend: "+3% yoy" },
+                {
+                  metric: "Student service cost",
+                  value: "$420",
+                  trend: "-$30 yoy",
+                },
+              ],
+              description: "Financial and investment effectiveness metrics",
+            },
+            {
+              category: "Sustainable Development",
+              items: [
+                {
+                  metric: "Revenue growth rate",
+                  value: "35%/year",
+                  trend: "+5% yoy",
+                },
+                {
+                  metric: "Reinvestment ratio",
+                  value: "40% profits",
+                  trend: "stable",
+                },
+                {
+                  metric: "Professional team size",
+                  value: "120+ people",
+                  trend: "+15% yoy",
+                },
+                { metric: "New courses/year", value: "8", trend: "+2 yoy" },
+                {
+                  metric: "Talent retention rate",
+                  value: "92%",
+                  trend: "+3% yoy",
+                },
+                {
+                  metric: "R&D investment",
+                  value: "18% revenue",
+                  trend: "+2% yoy",
+                },
+              ],
+              description:
+                "Organizational development and sustainability metrics",
+            },
+            {
+              category: "Social Impact",
+              items: [
+                {
+                  metric: "Graduates/year",
+                  value: "1,200+",
+                  trend: "+20% yoy",
+                },
+                {
+                  metric: "Jobs created/year",
+                  value: "850+",
+                  trend: "+15% yoy",
+                },
+                {
+                  metric: "Corporate partners",
+                  value: "75+",
+                  trend: "+12 yoy",
+                },
+                {
+                  metric: "Scholarships provided/year",
+                  value: "$150,000",
+                  trend: "+25% yoy",
+                },
+                {
+                  metric: "Community events/year",
+                  value: "36+",
+                  trend: "+5 yoy",
+                },
+                { metric: "Net Promoter Score", value: "72", trend: "+5 yoy" },
+              ],
+              description: "Community and social impact metrics",
+            },
+          ],
+        },
       },
-      educationalImpact: "These values are interconnected, creating a comprehensive educational ecosystem. When integrated into curriculum and school culture, they form a solid foundation for intellectual, character, and life skills development—preparing students not only for academic success but for lifelong flourishing.",
-      images: {
-        Proactiveness: "/images/proactive.jpg",
-        Inquisitiveness: "/images/learning.jpg",
-        Integrity: "/images/integrity.jpg",
-        Creativity: "/images/creativity.jpg",
-        Respect: "/images/respect.jpg",
-      },
+
+      menuItems: [
+        { id: "pillars", label: "Value Pillars" },
+        { id: "framework", label: "Operational Framework" },
+        { id: "quality", label: "Quality Assurance" },
+        { id: "commitments", label: "Student Commitments" },
+        { id: "metrics", label: "Performance Metrics" },
+      ],
+
+      conclusion:
+        "AGUA's value system is designed as a unified entity - from strategy to operations, from people to technology. Each component is measured with specific indicators, evaluated periodically, and improved continuously. We don't just commit - we prove with tangible results, creating positive and sustainable impact for each student and the entire community.",
     },
   };
 
   const t = content[language] || content.vie;
-
-  const getValueKeys = () => {
-    if (language === "vie") {
-      return [
-        "Proactiveness - Chủ Động",
-        "Inquisitiveness - Ham Học Hỏi",
-        "Integrity - Chính Trực",
-        "Creativity - Sáng Tạo",
-        "Respect - Tôn Trọng",
-      ];
-    } else {
-      return [
-        "Proactiveness",
-        "Inquisitiveness",
-        "Integrity",
-        "Creativity",
-        "Respect",
-      ];
-    }
-  };
-
-  const containerRef = useRef(null);
-  const valueItemsRef = useRef([]);
-  const philosophyRef = useRef(null);
-  const impactRef = useRef(null);
-
-  const addToRefs = (el) => {
-    if (el && !valueItemsRef.current.includes(el)) {
-      valueItemsRef.current.push(el);
-    }
-  };
+  const activeContent = t.sections[activeSection];
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Mission statement animation
+    if (contentRef.current) {
       gsap.fromTo(
-        ".mission-statement",
-        {
-          y: 50,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          scrollTrigger: {
-            trigger: ".mission-statement",
-            start: "top 85%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse",
-          },
-        }
+        contentRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
       );
+    }
+  }, [activeSection]);
 
-      // Educational philosophy animation
-      gsap.fromTo(
-        ".educational-philosophy",
-        {
-          x: -50,
-          opacity: 0,
-        },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 1,
-          scrollTrigger: {
-            trigger: ".educational-philosophy",
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
+  const renderContent = () => {
+    switch (activeSection) {
+      case "pillars":
+        return (
+          <div className="space-y-8">
+            {activeContent.content.map((pillar) => (
+              <div
+                key={pillar.id}
+                className="title-text pillar-item border border-gray-200 rounded-xl overflow-hidden"
+              >
+                <div className="flex flex-col lg:flex-row">
+                  {/* Header with Pillar Number */}
+                  <div
+                    className="lg:w-1/4 p-8"
+                    style={{ backgroundColor: "#0974B6" }}
+                  >
+                    <div className="text-white">
+                      <div className="text-5xl font-bold text-blue-100 mb-2">
+                        0{pillar.id}
+                      </div>
+                      <div className="w-12 h-1 bg-blue-300 mb-4"></div>
+                      <h3 className="text-xl font-bold mb-2">{pillar.title}</h3>
+                      <div className="text-blue-200 text-sm">
+                        {language === "vie" ? "Trụ cột" : "Pillar"} {pillar.id}
+                      </div>
+                    </div>
+                  </div>
 
-      // Value items animation
-      valueItemsRef.current.forEach((item, index) => {
-        const icon = item.querySelector(".icon-circle");
-        const title = item.querySelector(".value-title");
-        const description = item.querySelector(".value-description");
-        const image = item.querySelector(".value-image img");
+                  {/* Content */}
+                  <div className="lg:w-3/4 p-8">
+                    <p className="text-gray-700 mb-8 text-lg">
+                      {pillar.description}
+                    </p>
 
-        const itemTl = gsap.timeline({
-          scrollTrigger: {
-            trigger: item,
-            start: "top 85%",
-            end: "bottom 15%",
-            toggleActions: "play none none reverse",
-          },
-        });
+                    <div className="grid md:grid-cols-3 gap-6 mb-8">
+                      {/* Key Metrics */}
+                      <div>
+                        <h4 className="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wider">
+                          {language === "vie" ? "Chỉ Số Chính" : "Key Metrics"}
+                        </h4>
+                        <div className="space-y-3">
+                          {pillar.keyMetrics.map((metric, i) => (
+                            <div
+                              key={i}
+                              className="border-l-4 pl-4 py-2"
+                              style={{ borderColor: "#0974B6" }}
+                            >
+                              <div
+                                className="text-2xl font-bold"
+                                style={{ color: "#0974B6" }}
+                              >
+                                {metric.value}
+                              </div>
+                              <div className="text-sm text-gray-600">
+                                {metric.label}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
 
-        itemTl.fromTo(
-          icon,
-          {
-            rotation: -180,
-            scale: 0,
-            opacity: 0,
-          },
-          {
-            rotation: 0,
-            scale: 1,
-            opacity: 1,
-            duration: 0.8,
-            ease: "back.out(1.4)",
-          },
-          0
-        );
+                      {/* Processes */}
+                      <div>
+                        <h4 className="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wider">
+                          {language === "vie" ? "Quy Trình" : "Processes"}
+                        </h4>
+                        <ul className="space-y-2">
+                          {pillar.processes.map((process, i) => (
+                            <li
+                              key={i}
+                              className="text-gray-600 text-sm flex items-start"
+                            >
+                              <div
+                                className="w-1.5 h-1.5 rounded-full mt-1.5 mr-3 flex-shrink-0"
+                                style={{ backgroundColor: "#0974B6" }}
+                              ></div>
+                              <span>{process}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
 
-        itemTl.fromTo(
-          title,
-          {
-            x: -50,
-            opacity: 0,
-          },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          0.2
-        );
-
-        itemTl.fromTo(
-          description,
-          {
-            y: 30,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: "power2.out",
-          },
-          0.4
-        );
-
-        itemTl.fromTo(
-          image,
-          {
-            scale: 0.8,
-            opacity: 0,
-            filter: "blur(5px)",
-          },
-          {
-            scale: 1,
-            opacity: 1,
-            filter: "blur(0px)",
-            duration: 1,
-            ease: "power2.out",
-          },
-          0.6
-        );
-      });
-
-      // Educational impact animation
-      gsap.fromTo(
-        ".educational-impact",
-        {
-          y: 50,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          scrollTrigger: {
-            trigger: ".educational-impact",
-            start: "top 85%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, [language]);
-
-  return (
-    <div
-      className="core-values-container py-24 bg-gradient-to-b from-blue-50 via-white to-blue-100/30"
-      ref={containerRef}
-    >
-      <div className="container mx-auto px-6 lg:px-8 max-w-7xl">
-        {/* Section Header */}
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1B2340] mb-6">
-            {t.title}
-          </h2>
-          <p className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
-            {t.subtitle}
-          </p>
-        </div>
-
-        {/* Mission Statement */}
-        <div className="mission-statement mb-16 max-w-6xl mx-auto">
-          <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-2xl border border-blue-100/50">
-            <div className="flex items-start space-x-4">
-              <div className="flex-shrink-0 mt-2">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-                  <span className="text-white text-2xl">✦</span>
+                      {/* Tools */}
+                      <div>
+                        <h4 className="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wider">
+                          {language === "vie" ? "Công Cụ" : "Tools"}
+                        </h4>
+                        <ul className="space-y-2">
+                          {pillar.tools.map((tool, i) => (
+                            <li
+                              key={i}
+                              className="text-gray-600 text-sm flex items-start"
+                            >
+                              <div
+                                className="w-1.5 h-1.5 rounded-full mt-1.5 mr-3 flex-shrink-0"
+                                style={{ backgroundColor: "#0974B6" }}
+                              ></div>
+                              <span>{tool}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div>
-                <h3 className="text-2xl md:text-3xl font-bold text-[#1B2340] mb-4">
-                  {language === "vie" ? "Tầm Nhìn Giáo Dục" : "Educational Vision"}
-                </h3>
-                <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-                  {t.missionStatement}
-                </p>
+            ))}
+          </div>
+        );
+      case "framework":
+        return (
+          <div className="grid md:grid-cols-2 gap-6">
+            {activeContent.content.map((component, index) => (
+              <div
+                key={index}
+                className="title-text framework-item bg-white rounded-xl p-8 border border-gray-200"
+              >
+                <div className="mb-6">
+                  <div className="text-sm text-gray-500 mb-1">
+                    {language === "vie" ? "Thành phần" : "Component"}{" "}
+                    {index + 1}
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    {component.component}
+                  </h3>
+                  <p className="text-gray-600 mb-4">{component.description}</p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wider">
+                      {language === "vie" ? "Tiêu Chuẩn" : "Standards"}
+                    </h4>
+                    <ul className="space-y-2">
+                      {component.standards.map((standard, i) => (
+                        <li key={i} className="text-gray-600 text-sm">
+                          <span className="text-gray-900 font-medium">•</span>{" "}
+                          {standard}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wider">
+                      {language === "vie" ? "Đặc Điểm" : "Key Features"}
+                    </h4>
+                    <ul className="space-y-2">
+                      {component.keyFeatures.map((feature, i) => (
+                        <li key={i} className="text-gray-600 text-sm">
+                          <span className="text-gray-900 font-medium">•</span>{" "}
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
-        </div>
+        );
 
-        {/* Educational Philosophy */}
-        <div className="educational-philosophy mb-20 max-w-6xl mx-auto">
-          <div className="bg-gradient-to-r from-blue-50 to-cyan-50/50 rounded-3xl p-8 md:p-10 border border-blue-200/30">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl md:text-3xl font-bold text-[#1B2340]">
-                {language === "vie" ? "Triết Lý Giáo Dục" : "Educational Philosophy"}
-              </h3>
-              <div className="hidden md:block w-16 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"></div>
-            </div>
-            <p className="text-lg text-gray-700 leading-relaxed">
-              {t.educationalPhilosophy}
-            </p>
-          </div>
-        </div>
-
-        {/* Core Values Grid */}
-        <div className="values-grid max-w-6xl mx-auto mb-20">
-          {getValueKeys().map((key, index) => (
-            <div
-              key={key}
-              className={`value-item bg-white rounded-3xl shadow-xl overflow-hidden mb-8 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-gray-100`}
-              ref={addToRefs}
-            >
-              <div className="flex flex-col lg:flex-row items-stretch">
-                {/* Content Section */}
-                <div className="lg:w-2/3 p-8 lg:p-10">
-                  <div className="flex items-start space-x-6">
-                    <div className="value-icon flex-shrink-0">
-                      <div className="icon-circle w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center text-white text-3xl font-bold shadow-xl">
+      case "quality":
+        return (
+          <div className="space-y-8">
+            {activeContent.content.map((mechanism, index) => (
+              <div
+                key={index}
+                className="title-text quality-item border border-gray-200 rounded-xl overflow-hidden"
+              >
+                <div className="bg-gray-50 p-8 border-b border-gray-200">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <div className="text-sm text-gray-500 mb-1">
+                        {language === "vie" ? "Cơ chế" : "Mechanism"}{" "}
                         {index + 1}
                       </div>
-                    </div>
-                    <div className="value-content flex-1">
-                      <div className="flex items-center justify-between mb-4">
-                        <h3 className="value-title text-2xl lg:text-3xl font-bold text-[#1B2340] leading-tight">
-                          {key}
-                        </h3>
-                        <div className="hidden lg:block w-12 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full"></div>
-                      </div>
-                      <p className="value-description text-gray-700 leading-relaxed text-lg">
-                        {t.values[key]}
-                      </p>
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">
+                        {mechanism.mechanism}
+                      </h3>
+                      <p className="text-gray-600">{mechanism.description}</p>
                     </div>
                   </div>
                 </div>
 
-                {/* Image Section */}
-                <div className="value-image lg:w-1/3 relative overflow-hidden min-h-[300px] lg:min-h-full">
-                  <div className="absolute inset-0 bg-gradient-to-l from-blue-100/30 to-transparent z-10"></div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
-                  <img
-                    src={t.images[key]}
-                    alt={key}
-                    className="w-full h-full object-cover transform transition-transform duration-700 hover:scale-110"
-                    onError={(e) => {
-                      e.target.src = "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80";
-                    }}
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 z-20">
-                    <div className="text-white text-sm font-semibold bg-black/40 backdrop-blur-sm rounded-full px-4 py-2 inline-block">
-                      {language === "vie" ? "Giá Trị Cốt Lõi" : "Core Value"}
+                <div className="p-8">
+                  <div className="grid md:grid-cols-3 gap-8">
+                    <div className="md:col-span-2">
+                      <h4 className="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wider">
+                        {language === "vie"
+                          ? "Chi Tiết Thực Hiện"
+                          : "Implementation Details"}
+                      </h4>
+                      <ul className="space-y-3">
+                        {mechanism.details.map((detail, i) => (
+                          <li
+                            key={i}
+                            className="text-gray-600 flex items-start"
+                          >
+                            <div className="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                              <span className="text-xs font-bold text-gray-700">
+                                {i + 1}
+                              </span>
+                            </div>
+                            <span>{detail}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h4 className="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wider">
+                        {language === "vie"
+                          ? "Chỉ Số Đo Lường"
+                          : "Measurement Metrics"}
+                      </h4>
+                      <div className="space-y-4">
+                        {mechanism.metrics.map((metric, i) => (
+                          <div
+                            key={i}
+                            className="border border-gray-200 rounded-lg p-4"
+                          >
+                            <div className="text-lg font-bold text-gray-900">
+                              {metric}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        );
+
+      case "commitments":
+        return (
+          <div className="space-y-6">
+            {activeContent.content.map((item, index) => (
+              <div
+                key={index}
+                className="title-text commitment-item border border-gray-200 rounded-xl overflow-hidden"
+              >
+                <div
+                  className="text-white p-6"
+                  style={{ backgroundColor: "#0974B6" }}
+                >
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <div className="text-sm text-blue-100 mb-1">
+                        {language === "vie" ? "Cam kết" : "Commitment"}{" "}
+                        {index + 1}
+                      </div>
+                      <h3 className="text-xl font-bold mb-2">
+                        {item.commitment}
+                      </h3>
+                      <p className="text-blue-100">{item.details}</p>
+                    </div>
+                    <div className="bg-white text-blue-600 text-sm font-bold px-3 py-1 rounded-full">
+                      {item.successRate}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-6 bg-gray-50">
+                  <h4 className="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wider">
+                    {language === "vie"
+                      ? "Chi Tiết Cụ Thể"
+                      : "Specific Details"}
+                  </h4>
+                  <ul className="grid md:grid-cols-2 gap-4">
+                    {item.specifics.map((specific, i) => (
+                      <li
+                        key={i}
+                        className="text-gray-600 text-sm border border-gray-200 rounded-lg p-4 bg-white"
+                      >
+                        <div className="flex items-start">
+                          <div
+                            className="w-1.5 h-1.5 rounded-full mt-1 mr-3 flex-shrink-0"
+                            style={{ backgroundColor: "#0974B6" }}
+                          ></div>
+                          <span>{specific}</span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+
+      case "metrics":
+        return (
+          <div className="grid md:grid-cols-2 gap-8">
+            {activeContent.content.map((category, index) => (
+              <div key={index} className="metrics-item">
+                <div className="title-text border border-gray-200 rounded-xl overflow-hidden h-full">
+                  <div
+                    className="text-white p-6"
+                    style={{ backgroundColor: "#0974B6" }}
+                  >
+                    <h3 className="text-xl font-bold mb-2">
+                      {category.category}
+                    </h3>
+                    <p className="text-blue-100 text-sm">
+                      {category.description}
+                    </p>
+                  </div>
+
+                  <div className="p-6">
+                    <div className="space-y-4">
+                      {category.items.map((item, i) => (
+                        <div
+                          key={i}
+                          className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors"
+                        >
+                          <div className="flex justify-between items-start mb-2">
+                            <div className="text-gray-700 font-medium">
+                              {item.metric}
+                            </div>
+                            <div
+                              className={`text-sm font-bold px-2 py-1 rounded ${
+                                item.trend.includes("+")
+                                  ? "bg-green-100 text-green-800"
+                                  : item.trend.includes("-")
+                                    ? "bg-red-100 text-red-800"
+                                    : "bg-gray-100 text-gray-800"
+                              }`}
+                            >
+                              {item.trend}
+                            </div>
+                          </div>
+                          <div
+                            className="text-2xl font-bold"
+                            style={{ color: "#0974B6" }}
+                          >
+                            {item.value}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <div className="pt-20 pb-12 px-4 md:px-8 max-w-7xl mx-auto">
+        <div className="section-header text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            {t.title}
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            {t.subtitle}
+          </p>
+          <div className="w-24 h-1 bg-gray-300 mx-auto mt-8"></div>
         </div>
 
-        {/* Educational Impact */}
-        <div className="educational-impact max-w-6xl mx-auto">
-          <div className="bg-gradient-to-br from-[#1B2340] to-[#3d76b8] rounded-3xl p-10 md:p-12 text-white shadow-2xl">
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="text-2xl md:text-3xl font-bold">
-                {language === "vie" ? "Tác Động Giáo Dục Toàn Diện" : "Holistic Educational Impact"}
-              </h3>
-              <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
-                <span className="text-2xl">⚡</span>
+        {/* Introduction */}
+        <div className="intro-section max-w-5xl mx-auto mb-16">
+          <div className="bg-gray-50 rounded-xl p-8 border border-gray-200">
+            <p className="text-lg text-gray-700 leading-relaxed">{t.intro}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content Grid - 3:7 Layout */}
+      <div className="main-content pb-16 px-4 md:px-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-10 gap-8">
+          {/* Left Sidebar - Menu (3 columns) */}
+          <div className="lg:col-span-3">
+            <div className="sticky top-24">
+              <div className="bg-gray-50 rounded-xl border border-gray-200">
+                <div className="p-6 border-b border-gray-200">
+                  <h3 className="text-lg font-bold text-gray-900">
+                    {language === "vie" ? "Nội Dung Chính" : "Main Content"}
+                  </h3>
+                  <p className="text-gray-600 text-sm mt-1">
+                    {language === "vie"
+                      ? "Chọn phần để xem chi tiết"
+                      : "Select a section for details"}
+                  </p>
+                </div>
+
+                <nav className="p-4">
+                  <div className="space-y-1">
+                    {t.menuItems.map((item) => {
+                      const isActive = activeSection === item.id;
+
+                      return (
+                        <button
+                          key={item.id}
+                          onClick={() => setActiveSection(item.id)}
+                          className={`w-full text-left p-4 rounded-lg transition-all duration-200 ${
+                            isActive
+                              ? "text-white shadow-lg"
+                              : "text-gray-700 hover:bg-gray-100 hover:shadow-sm"
+                          }`}
+                          style={isActive ? { backgroundColor: "#0974B6" } : {}}
+                        >
+                          <div className="flex items-center">
+                            <div
+                              className={`w-3 h-3 rounded-full mr-3 ${
+                                isActive ? "bg-white" : "bg-blue-300"
+                              }`}
+                            ></div>
+                            <span className="font-medium">{item.label}</span>
+                            {isActive && (
+                              <div className="ml-auto">
+                                <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                              </div>
+                            )}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </nav>
               </div>
             </div>
-            <p className="text-lg md:text-xl leading-relaxed opacity-95">
-              {t.educationalImpact}
-            </p>
-            <div className="mt-8 pt-8 border-t border-white/20">
-              <div className="flex flex-wrap gap-4">
-                <div className="bg-white/10 rounded-full px-6 py-3 backdrop-blur-sm">
-                  <span className="font-semibold">
-                    {language === "vie" ? "Phát Triển Toàn Diện" : "Holistic Development"}
-                  </span>
+          </div>
+
+          {/* Right Content Area (7 columns) */}
+          <div className="lg:col-span-7">
+            <div ref={contentRef} className="content-area">
+              {/* Active Section Header */}
+              <div className="mb-8">
+                <div className="mb-4">
+                  <div className="text-sm text-gray-500 mb-2 uppercase tracking-wider">
+                    {language === "vie" ? "PHẦN HIỆN TẠI" : "CURRENT SECTION"}
+                  </div>
+                  <h2 className="text-3xl font-bold text-gray-900">
+                    {activeContent.title}
+                  </h2>
+                  <p className="text-gray-600 mt-2 text-lg">
+                    {activeContent.subtitle}
+                  </p>
                 </div>
-                <div className="bg-white/10 rounded-full px-6 py-3 backdrop-blur-sm">
-                  <span className="font-semibold">
-                    {language === "vie" ? "Lãnh Đạo Tương Lai" : "Future Leadership"}
-                  </span>
-                </div>
-                <div className="bg-white/10 rounded-full px-6 py-3 backdrop-blur-sm">
-                  <span className="font-semibold">
-                    {language === "vie" ? "Công Dân Toàn Cầu" : "Global Citizenship"}
-                  </span>
+                <div className="w-24 h-1 bg-gray-900"></div>
+              </div>
+
+              {/* Active Content */}
+              <div className="content-body">{renderContent()}</div>
+
+              {/* Conclusion Section */}
+              <div className="conclusion-section mt-16 pt-8 border-t border-gray-200">
+                <div className="bg-gray-50 rounded-xl p-8 border border-gray-200">
+                  <div className="text-center">
+                    <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                      "{t.conclusion}"
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-6 mt-6">
+                      <div className="text-gray-900 text-sm font-bold px-4 py-2 bg-white border border-gray-200 rounded-lg">
+                        ISO 9001:2015
+                      </div>
+                      <div className="text-gray-900 text-sm font-bold px-4 py-2 bg-white border border-gray-200 rounded-lg">
+                        {language === "vie"
+                          ? "Đo lường hiệu quả"
+                          : "Effectiveness Measured"}
+                      </div>
+                      <div className="text-gray-900 text-sm font-bold px-4 py-2 bg-white border border-gray-200 rounded-lg">
+                        {language === "vie"
+                          ? "Cải tiến liên tục"
+                          : "Continuous Improvement"}
+                      </div>
+                      <div className="text-gray-900 text-sm font-bold px-4 py-2 bg-white border border-gray-200 rounded-lg">
+                        {language === "vie"
+                          ? "Minh bạch thông tin"
+                          : "Information Transparency"}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Decorative Elements */}
-        <div className="absolute top-20 left-10 w-64 h-64 bg-blue-200/10 rounded-full blur-3xl -z-10"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-200/10 rounded-full blur-3xl -z-10"></div>
-        <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-gradient-to-br from-blue-400/5 to-cyan-400/5 rounded-full -z-10"></div>
       </div>
     </div>
   );

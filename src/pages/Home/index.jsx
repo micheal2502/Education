@@ -845,20 +845,28 @@ const Home = () => {
               <div className="map-container">
                 <div className="map-layout flex flex-col lg:flex-row gap-6">
                   <div className="map-content w-full lg:w-1/2">
-                    <h2 className="missions-title text-xl sm:text-2xl md:text-3xl">{t.minimap.title}</h2>
+                    <h2 className="missions-title text-xl sm:text-2xl md:text-3xl">
+                      {t.minimap.title}
+                    </h2>
                     <h3 className="section-description text-base sm:text-lg md:text-xl">
                       {t.minimap.subtitle}
                     </h3>
-                    <p className="text-sm sm:text-base">{t.minimap.description}</p>
+                    <p className="text-sm sm:text-base">
+                      {t.minimap.description}
+                    </p>
 
                     <div className="highlighted-countries mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
                       <div className="country-item">
                         <span className="country-dot usa-dot"></span>
-                        <span className="country-name text-sm">United States</span>
+                        <span className="country-name text-sm">
+                          United States
+                        </span>
                       </div>
                       <div className="country-item">
                         <span className="country-dot uk-dot"></span>
-                        <span className="country-name text-sm">United Kingdom</span>
+                        <span className="country-name text-sm">
+                          United Kingdom
+                        </span>
                       </div>
                       <div className="country-item">
                         <span className="country-dot aus-dot"></span>
@@ -874,7 +882,9 @@ const Home = () => {
                       </div>
                       <div className="country-item">
                         <span className="country-dot nz-dot"></span>
-                        <span className="country-name text-sm">New Zealand</span>
+                        <span className="country-name text-sm">
+                          New Zealand
+                        </span>
                       </div>
                       <div className="country-item sm:col-span-2">
                         <span className="country-dot hk-dot"></span>
@@ -935,8 +945,12 @@ const Home = () => {
 
             <div className="grid-cell cell-40 p-4 md:p-6">
               <div className="content">
-                <h2 className="text-lg sm:text-xl md:text-2xl">{t.minimap.networkTitle}</h2>
-                <p className="text-sm sm:text-base mb-4">{t.minimap.networkDesc}</p>
+                <h2 className="text-lg sm:text-xl md:text-2xl">
+                  {t.minimap.networkTitle}
+                </h2>
+                <p className="text-sm sm:text-base mb-4">
+                  {t.minimap.networkDesc}
+                </p>
                 <ul className="special-text country-list space-y-2">
                   {t.minimap.countries.map((country, index) => (
                     <li key={index} className="text-xs sm:text-sm md:text-base">
@@ -1022,7 +1036,9 @@ const Home = () => {
                 </div>
               </div>
               <div className="flex items-center space-x-2 text-[#3d76b8] font-medium cursor-pointer group mt-4">
-                <span className="text-sm sm:text-base">{t.secondSection.explore}</span>
+                <span className="text-sm sm:text-base">
+                  {t.secondSection.explore}
+                </span>
                 <svg
                   className="w-4 h-4 transition-transform group-hover:translate-x-1"
                   fill="none"
@@ -1201,9 +1217,11 @@ const Home = () => {
                         {t.fourthSection.description}
                       </p>
                       <div className="flex items-center gap-3">
-                        <span className="plan-text text-base sm:text-lg font-bold text-[#1B2340] whitespace-nowrap 
+                        <span
+                          className="plan-text text-base sm:text-lg font-bold text-[#1B2340] whitespace-nowrap 
                         cursor-pointer transition-all duration-300 ease-in-out
-                        hover:text-[#2c5a8a] hover:scale-105 hover:underline">
+                        hover:text-[#2c5a8a] hover:scale-105 hover:underline"
+                        >
                           {t.fourthSection.teamName}
                         </span>
                       </div>
@@ -1288,12 +1306,20 @@ const Home = () => {
           <div className="marquee-content">
             {logos.map((logo) => (
               <div key={logo.id} className="logo-item">
-                <img src={logo.logo} alt={logo.name} className="logo-image h-8 sm:h-10 md:h-12 object-contain" />
+                <img
+                  src={logo.logo}
+                  alt={logo.name}
+                  className="logo-image h-8 sm:h-10 md:h-12 object-contain"
+                />
               </div>
             ))}
             {logos.map((logo) => (
               <div key={`${logo.id}-duplicate`} className="logo-item">
-                <img src={logo.logo} alt={logo.name} className="logo-image h-8 sm:h-10 md:h-12 object-contain" />
+                <img
+                  src={logo.logo}
+                  alt={logo.name}
+                  className="logo-image h-8 sm:h-10 md:h-12 object-contain"
+                />
               </div>
             ))}
           </div>

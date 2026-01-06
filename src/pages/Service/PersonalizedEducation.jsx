@@ -75,7 +75,6 @@ const Services = () => {
     return () => ctx.revert();
   }, [language]);
 
-
   useEffect(() => {
     const ctx = gsap.context(() => {
       const sectionTl = gsap.timeline({
@@ -317,7 +316,10 @@ const Services = () => {
       <div className="py-12 sm:py-16 md:py-20"></div>
 
       {/* Luminary Table */}
-      <section ref={comparisonSectionRef} className="py-12 sm:py-16 md:py-20 bg-gray-50">
+      <section
+        ref={comparisonSectionRef}
+        className="py-12 sm:py-16 md:py-20 bg-gray-50"
+      >
         <div className="container mx-auto px-3 sm:px-4 md:px-6">
           <div className="text-center max-w-5xl mx-auto px-2">
             <h1
@@ -362,7 +364,9 @@ const Services = () => {
                   <ul className="space-y-3 sm:space-y-4">
                     {luminaryTable.lifetimeBenefits.items.map((item, index) => (
                       <li key={index} className="flex items-start">
-                        <span className="text-blue-500 mr-2 sm:mr-3 mt-1 text-sm">•</span>
+                        <span className="text-blue-500 mr-2 sm:mr-3 mt-1 text-sm">
+                          •
+                        </span>
                         <span className="manrope-regular text-gray-700 text-sm sm:text-base">
                           {item}
                         </span>
@@ -560,7 +564,10 @@ const Services = () => {
                         content.classList.add("max-h-[500px]", "opacity-100");
                         icon.style.transform = "rotate(180deg)";
                       } else {
-                        content.classList.remove("max-h-[500px]", "opacity-100");
+                        content.classList.remove(
+                          "max-h-[500px]",
+                          "opacity-100",
+                        );
                         content.classList.add("max-h-0", "opacity-0");
                         icon.style.transform = "rotate(0deg)";
                       }

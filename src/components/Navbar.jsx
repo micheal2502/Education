@@ -13,10 +13,16 @@ import {
 import TransitionLink from "./Layout/TransitionLinks";
 
 // Mobile Submenu Component (for overlay menu)
-const MobileSubmenuLink = ({ link, index, showLinks, handleLinkClick, isActiveLink }) => {
+const MobileSubmenuLink = ({
+  link,
+  index,
+  showLinks,
+  handleLinkClick,
+  isActiveLink,
+}) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const hasSubmenu = link.submenu && link.submenu.length > 0;
-  
+
   return (
     <div className="overflow-hidden">
       <div className="flex items-center justify-between">
@@ -24,21 +30,17 @@ const MobileSubmenuLink = ({ link, index, showLinks, handleLinkClick, isActiveLi
           to={link.path}
           onClick={!hasSubmenu ? handleLinkClick : undefined}
           className={`nav-link transition-all duration-700 transform pb-2 md:pb-3 text-2xl md:text-6xl ${
-            showLinks
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 -translate-y-8"
+            showLinks ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"
           } hover:text-blue-400 ${
             isActiveLink(link.path) ? "nav-link-active" : ""
           } ${hasSubmenu ? "cursor-pointer" : ""}`}
           style={{
-            transitionDelay: showLinks
-              ? `${index * 100 + 200}ms`
-              : "0ms",
+            transitionDelay: showLinks ? `${index * 100 + 200}ms` : "0ms",
           }}
         >
           {link.label}
         </TransitionLink>
-        
+
         {hasSubmenu && (
           <button
             onClick={(e) => {
@@ -54,7 +56,7 @@ const MobileSubmenuLink = ({ link, index, showLinks, handleLinkClick, isActiveLi
           </button>
         )}
       </div>
-      
+
       {/* Mobile submenu accordion */}
       {hasSubmenu && isExpanded && (
         <div className="ml-6 mt-3 mb-4 space-y-2 animate-fadeIn">
@@ -66,7 +68,7 @@ const MobileSubmenuLink = ({ link, index, showLinks, handleLinkClick, isActiveLi
               className="block text-xl md:text-3xl text-gray-600 hover:text-[#0974B6] pl-4 py-2 border-l-2 border-blue-200 hover:border-[#0974B6] transition-all duration-300"
               style={{
                 transitionDelay: showLinks
-                  ? `${index * 100 + 300 + (subIndex * 50)}ms`
+                  ? `${index * 100 + 300 + subIndex * 50}ms`
                   : "0ms",
               }}
             >
@@ -84,9 +86,9 @@ const DesktopNavLink = ({ link, isActiveLink, language }) => {
   const [isHovered, setIsHovered] = useState(false);
   const timeoutRef = useRef(null);
   const dropdownRef = useRef(null);
-  
+
   const hasSubmenu = link.submenu && link.submenu.length > 0;
-  
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -94,24 +96,24 @@ const DesktopNavLink = ({ link, isActiveLink, language }) => {
         setIsHovered(false);
       }
     };
-    
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-  
+
   const handleMouseEnter = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     setIsHovered(true);
   };
-  
+
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
       setIsHovered(false);
     }, 200);
   };
-  
+
   return (
-    <div 
+    <div
       ref={dropdownRef}
       className="relative"
       onMouseEnter={handleMouseEnter}
@@ -120,28 +122,30 @@ const DesktopNavLink = ({ link, isActiveLink, language }) => {
       <TransitionLink
         to={link.path}
         className={`px-6 py-3 text-sm font-medium transition-all duration-300 relative group ${
-          isActiveLink(link.path) 
-            ? "text-[#0974B6] font-semibold" 
+          isActiveLink(link.path)
+            ? "text-[#0974B6] font-semibold"
             : "text-gray-800 hover:text-[#0974B6]"
         }`}
       >
         <span className="relative z-10 flex items-center">
           {link.label}
           {hasSubmenu && (
-            <ChevronDown className={`ml-2 w-4 h-4 transition-transform duration-300 ${isHovered ? "rotate-180" : ""}`} />
+            <ChevronDown
+              className={`ml-2 w-4 h-4 transition-transform duration-300 ${isHovered ? "rotate-180" : ""}`}
+            />
           )}
         </span>
-        
+
         {/* Animated underline effect */}
         <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-[2px] bg-gradient-to-r from-[#0974B6] to-blue-300 transition-all duration-500 group-hover:w-4/5" />
       </TransitionLink>
-      
+
       {/* Luxurious desktop submenu dropdown */}
       {hasSubmenu && isHovered && (
         <div className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-blue-100/50 min-w-[280px] z-50 overflow-hidden animate-fadeIn">
           {/* Gradient top border */}
           <div className="h-[1px] bg-gradient-to-r from-transparent via-[#0974B6] to-transparent" />
-          
+
           <div className="p-2">
             {link.submenu.map((subItem) => (
               <TransitionLink
@@ -153,15 +157,15 @@ const DesktopNavLink = ({ link, isActiveLink, language }) => {
                 <div className="absolute left-3 opacity-0 group-hover/subitem:opacity-100 transition-opacity duration-300">
                   <div className="w-1 h-1 rounded-full bg-[#0974B6] animate-pulse" />
                 </div>
-                
+
                 <span className="pl-2">{subItem.label}</span>
-                
+
                 {/* Hover line effect */}
                 <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-[1px] bg-gradient-to-r from-transparent via-[#0974B6] to-transparent group-hover/subitem:w-3/4 transition-all duration-500" />
               </TransitionLink>
             ))}
           </div>
-          
+
           {/* Gradient bottom border */}
           <div className="h-[1px] bg-gradient-to-r from-transparent via-blue-300 to-transparent" />
         </div>
@@ -223,11 +227,11 @@ export const Navigation = () => {
     const checkDesktop = () => {
       setIsDesktop(window.innerWidth >= 768);
     };
-    
+
     checkDesktop();
-    window.addEventListener('resize', checkDesktop);
-    
-    return () => window.removeEventListener('resize', checkDesktop);
+    window.addEventListener("resize", checkDesktop);
+
+    return () => window.removeEventListener("resize", checkDesktop);
   }, []);
 
   // Effect to prevent scroll when menu is open
@@ -298,59 +302,121 @@ export const Navigation = () => {
   const { language, toggleLanguage } = useLanguage();
 
   // Updated navLinks with submenus
-const navLinks = {
-  vie: [
-    { path: "/home", label: "Trang Chủ" },
-    { 
-      path: "/services", 
-      label: "Gói Học Tập",
-      submenu: [
-        { path: "/services/personalized", label: "Lộ trình giáo dục chuyên biệt", enLabel: "IELTS Preparation" },
-        { path: "/services/program", label: "Chương trình trải nghiệm thực tế", enLabel: "SAT/ACT Preparation" },
-      ]
-    },
-    { 
-      path: "/philosophy", 
-      label: "Định Hướng",
-    },
-    { path: "/contact", label: "Liên Hệ" },
-    { 
-      path: "/about", 
-      label: "Con Người",
-    },
-    { path: "/connect/step1", label: "Khởi trình" },
-    { 
-      path: "/blog", 
-      label: "Blog",
-    },
-  ],
-  en: [
-    { path: "/home", label: "Home" },
-    { 
-      path: "/services", 
-      label: "Learning Packages",
-      submenu: [
-        { path: "/services/personalized", label: "Personalized Educational Pathway", vieLabel: "Lộ trình giáo dục chuyên biệt" },
-        { path: "/services/program", label: "Practical Experience Program", vieLabel: "Chương trình trải nghiệm thực tế" },
-      ]
-    },
-    { 
-      path: "/philosophy", 
-      label: "Philosophy",
-    },
-    { path: "/contact", label: "Contact" },
-    { 
-      path: "/about", 
-      label: "Our People",
-    },
-    { path: "/connect/step1", label: "Get Started" },
-    { 
-      path: "/blog", 
-      label: "Blog",
-
-    },
-  ],
-};
+  const navLinks = {
+    vie: [
+      { path: "/home", label: "Trang Chủ" },
+      {
+        path: "/services",
+        label: "Gói Học Tập",
+        submenu: [
+          {
+            path: "/services/personalized",
+            label: "Lộ trình giáo dục chuyên biệt",
+            enLabel: "IELTS Preparation",
+          },
+          {
+            path: "/services/program",
+            label: "Chương trình trải nghiệm thực tế",
+            enLabel: "SAT/ACT Preparation",
+          },
+        ],
+      },
+      {
+        path: "/philosophy",
+        label: "Định Hướng",
+        submenu: [
+          {
+            path: "/philosophy/mission",
+            label: "Giá trị thực tiễn với Aguaer",
+            vieLabel: "Our value for Aguaer",
+          },
+          {
+            path: "/philosophy/corevalue",
+            label: "Giá trị cốt lõi của Agua",
+            vieLabel: "Agua's core value",
+          },
+        ],
+      },
+      { path: "/contact", label: "Liên Hệ" },
+      {
+        path: "/about",
+        label: "Con Người",
+        submenu: [
+          {
+            path: "/about/founder",
+            label: "Người Sáng Lập",
+            vieLabel: "Founder",
+          },
+          {
+            path: "/about/mentor",
+            label: "Giảng Viên Đồng Hành",
+            vieLabel: "Mentor",
+          },
+        ],
+      },
+      {
+        path: "/blog",
+        label: "Blog",
+      },
+    ],
+    en: [
+      { path: "/home", label: "Home" },
+      {
+        path: "/services",
+        label: "Learning Packages",
+        submenu: [
+          {
+            path: "/services/personalized",
+            label: "Personalized Educational Pathway",
+            vieLabel: "Lộ trình giáo dục chuyên biệt",
+          },
+          {
+            path: "/services/program",
+            label: "Practical Experience Program",
+            vieLabel: "Chương trình trải nghiệm thực tế",
+          },
+        ],
+      },
+      {
+        path: "/philosophy",
+        label: "Philosophy",
+        submenu: [
+          {
+            path: "/philosophy/mission",
+            label: "Our value for Aguaer",
+            vieLabel: "Giá trị thực tiễn",
+          },
+          {
+            path: "/philosophy/corevalue",
+            label: "Agua's core value",
+            vieLabel: "Giá trị cốt lõi của Agua",
+          },
+        ],
+      },
+      { path: "/contact", label: "Contact" },
+      
+      {
+        path: "/about",
+        label: "Our People",
+        submenu: [
+          {
+            path: "/about/founder",
+            label: "Founder",
+            vieLabel: "Người Sáng Lập",
+          },
+          {
+            path: "/about/mentor",
+            label: "Mentor",
+            vieLabel: "Giảng Viên Đồng Hành",
+          },
+        ],
+      },
+      {
+        path: "/blog",
+        label: "Blog",
+      },
+    ],
+  };
 
   const toggleMenu = () => {
     if (!menuOpen) {
@@ -393,8 +459,8 @@ const navLinks = {
               key={lang}
               onClick={() => changeLanguage(lang)}
               className={`cursor-pointer py-1.5 px-3 text-sm transition font-medium rounded-lg ${
-                lang === getDisplayLanguage() 
-                  ? "text-[#0974B6] bg-blue-50/50" 
+                lang === getDisplayLanguage()
+                  ? "text-[#0974B6] bg-blue-50/50"
                   : "text-gray-700 hover:text-[#0974B6] hover:bg-blue-50/30"
               }`}
             >
@@ -452,7 +518,7 @@ const navLinks = {
             <div className="hidden md:flex flex-1 justify-center">
               <div className="flex items-center space-x-8">
                 {currentNavLinks.map((link) => (
-                  <DesktopNavLink 
+                  <DesktopNavLink
                     key={link.path}
                     link={link}
                     isActiveLink={isActiveLink}
@@ -503,8 +569,18 @@ const navLinks = {
               onClick={toggleMenu}
               className="p-2 text-[#1B2340] hover:text-blue-600 transition-colors"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
@@ -554,8 +630,12 @@ const navLinks = {
                   <div className="p-3 rounded-full bg-gradient-to-br from-blue-100 to-white mb-3 group-hover:scale-110 transition-transform duration-300">
                     <Facebook className="w-5 h-5 text-[#0974B6]" />
                   </div>
-                  <span className="text-xs font-medium text-[#1B2340]">Facebook</span>
-                  <span className="text-xs text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">@agua</span>
+                  <span className="text-xs font-medium text-[#1B2340]">
+                    Facebook
+                  </span>
+                  <span className="text-xs text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    @agua
+                  </span>
                 </a>
 
                 <a
@@ -567,8 +647,12 @@ const navLinks = {
                   <div className="p-3 rounded-full bg-gradient-to-br from-blue-100 to-white mb-3 group-hover:scale-110 transition-transform duration-300">
                     <Linkedin className="w-5 h-5 text-[#0974B6]" />
                   </div>
-                  <span className="text-xs font-medium text-[#1B2340]">LinkedIn</span>
-                  <span className="text-xs text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Agua</span>
+                  <span className="text-xs font-medium text-[#1B2340]">
+                    LinkedIn
+                  </span>
+                  <span className="text-xs text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    Agua
+                  </span>
                 </a>
 
                 <a
@@ -580,8 +664,12 @@ const navLinks = {
                   <div className="p-3 rounded-full bg-gradient-to-br from-pink-100 to-white mb-3 group-hover:scale-110 transition-transform duration-300">
                     <Instagram className="w-5 h-5 text-pink-500" />
                   </div>
-                  <span className="text-xs font-medium text-[#1B2340]">Instagram</span>
-                  <span className="text-xs text-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">@agua</span>
+                  <span className="text-xs font-medium text-[#1B2340]">
+                    Instagram
+                  </span>
+                  <span className="text-xs text-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    @agua
+                  </span>
                 </a>
               </div>
 
@@ -597,7 +685,9 @@ const navLinks = {
                       <Mail className="w-5 h-5 text-[#0974B6]" />
                     </div>
                     <div className="flex-1">
-                      <span className="text-sm font-medium text-[#1B2340]">Email</span>
+                      <span className="text-sm font-medium text-[#1B2340]">
+                        Email
+                      </span>
                       <a
                         href="mailto:info@aguainternational.edu"
                         className="text-sm text-blue-600 hover:text-blue-800 transition-colors duration-300 break-all block mt-1"
@@ -698,21 +788,21 @@ const navLinks = {
         .animate-fadeIn {
           animation: fadeIn 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
-        
+
         /* Custom scrollbar for overlay menu */
         .overflow-y-auto::-webkit-scrollbar {
           width: 6px;
         }
-        
+
         .overflow-y-auto::-webkit-scrollbar-track {
           background: transparent;
         }
-        
+
         .overflow-y-auto::-webkit-scrollbar-thumb {
           background: rgba(9, 116, 182, 0.2);
           border-radius: 3px;
         }
-        
+
         .overflow-y-auto::-webkit-scrollbar-thumb:hover {
           background: rgba(9, 116, 182, 0.3);
         }

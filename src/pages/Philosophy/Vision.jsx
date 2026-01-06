@@ -737,7 +737,6 @@ const Vision = () => {
 
   return (
     <>
-
       {/* Vision Section with ref */}
       <section className="py-16" ref={visionSectionRef}>
         <div className="vision-core-values">
@@ -746,9 +745,7 @@ const Vision = () => {
               {/* Vision Section */}
               <div className="space-y-8">
                 <div className="text-center lg:text-left">
-                  <h3 className="text-2xl md:text-3xl text-green-600 mb-6 flex items-center justify-center lg:justify-start">
-
-                  </h3>
+                  <h3 className="text-2xl md:text-3xl text-green-600 mb-6 flex items-center justify-center lg:justify-start"></h3>
                   <div className="p-4">
                     <p className="vision-description text-lg md:text-xl leading-relaxed mb-6">
                       {t.visionSection.visionDescription}
@@ -768,8 +765,7 @@ const Vision = () => {
               {/* Core Values Section */}
               <div className="space-y-8">
                 <div className="text-center lg:text-left">
-                  <h3 className="text-2xl md:text-3xl font-bold text-blue-600 mb-6 flex items-center justify-center lg:justify-start">
-                  </h3>
+                  <h3 className="text-2xl md:text-3xl font-bold text-blue-600 mb-6 flex items-center justify-center lg:justify-start"></h3>
                   <div className="space-y-6">
                     {t.visionSection.coreValues.map((value, index) => (
                       <div

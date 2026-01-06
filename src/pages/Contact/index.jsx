@@ -59,7 +59,7 @@ const Contact = () => {
       gsap.fromTo(
         heroTextRef.current,
         { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 1.5, ease: "power3.out", delay: 0.3 }
+        { opacity: 1, y: 0, duration: 1.5, ease: "power3.out", delay: 0.3 },
       );
     }
   }, []);
@@ -93,21 +93,36 @@ const Contact = () => {
       const title = contactInfoRef.current?.querySelector(".text-center h2");
       if (title) {
         gsap.set(title, { y: -50, opacity: 0 });
-        sectionTl.to(title, { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
+        sectionTl.to(
+          title,
+          { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+          0,
+        );
       }
 
       // Animation cho description
-      const description = contactInfoRef.current?.querySelector(".text-center p");
+      const description =
+        contactInfoRef.current?.querySelector(".text-center p");
       if (description) {
         gsap.set(description, { y: 50, opacity: 0 });
-        sectionTl.to(description, { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, 0.2);
+        sectionTl.to(
+          description,
+          { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+          0.2,
+        );
       }
 
       // Animation cho main contact card
-      const mainCard = contactInfoRef.current?.querySelector(".lg\\:col-span-2 .bg-white");
+      const mainCard = contactInfoRef.current?.querySelector(
+        ".lg\\:col-span-2 .bg-white",
+      );
       if (mainCard) {
         gsap.set(mainCard, { y: 80, opacity: 0, scale: 0.95 });
-        sectionTl.to(mainCard, { y: 0, opacity: 1, scale: 1, duration: 1, ease: "back.out(1.4)" }, 0.4);
+        sectionTl.to(
+          mainCard,
+          { y: 0, opacity: 1, scale: 1, duration: 1, ease: "back.out(1.4)" },
+          0.4,
+        );
       }
 
       // Animation cho các phần tử bên trong card
@@ -163,14 +178,22 @@ const Contact = () => {
       const formTitle = contactFormRef.current?.querySelector("h3");
       if (formTitle) {
         gsap.set(formTitle, { y: -30, opacity: 0 });
-        sectionTl.to(formTitle, { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, 0.2);
+        sectionTl.to(
+          formTitle,
+          { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+          0.2,
+        );
       }
 
       // Animation cho form description
       const formDescription = contactFormRef.current?.querySelector("p.mb-8");
       if (formDescription) {
         gsap.set(formDescription, { y: 30, opacity: 0 });
-        sectionTl.to(formDescription, { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, 0.3);
+        sectionTl.to(
+          formDescription,
+          { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+          0.3,
+        );
       }
 
       // Animation cho form inputs
@@ -188,14 +211,22 @@ const Contact = () => {
       const button = contactFormRef.current?.querySelector("button");
       if (button) {
         gsap.set(button, { y: 30, opacity: 0, scale: 0.9 });
-        sectionTl.to(button, { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.7)" }, 0.8);
+        sectionTl.to(
+          button,
+          { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.7)" },
+          0.8,
+        );
       }
 
       // Animation cho response time section
       const responseTime = contactFormRef.current?.querySelector(".mt-8");
       if (responseTime) {
         gsap.set(responseTime, { y: 50, opacity: 0 });
-        sectionTl.to(responseTime, { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, 1);
+        sectionTl.to(
+          responseTime,
+          { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+          1,
+        );
       }
     }, contactFormRef);
 
@@ -218,14 +249,23 @@ const Contact = () => {
       const mapTitle = contactMapRef.current?.querySelector(".text-center h2");
       if (mapTitle) {
         gsap.set(mapTitle, { y: -50, opacity: 0 });
-        sectionTl.to(mapTitle, { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
+        sectionTl.to(
+          mapTitle,
+          { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+          0,
+        );
       }
 
       // Animation cho section description
-      const mapDescription = contactMapRef.current?.querySelector(".text-center p");
+      const mapDescription =
+        contactMapRef.current?.querySelector(".text-center p");
       if (mapDescription) {
         gsap.set(mapDescription, { y: 50, opacity: 0 });
-        sectionTl.to(mapDescription, { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, 0.2);
+        sectionTl.to(
+          mapDescription,
+          { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+          0.2,
+        );
       }
 
       // Animation cho left content
@@ -234,7 +274,11 @@ const Contact = () => {
       );
       if (leftContent) {
         gsap.set(leftContent, { x: -100, opacity: 0 });
-        sectionTl.to(leftContent, { x: 0, opacity: 1, duration: 1, ease: "power2.out" }, 0.4);
+        sectionTl.to(
+          leftContent,
+          { x: 0, opacity: 1, duration: 1, ease: "power2.out" },
+          0.4,
+        );
       }
 
       // Animation cho right map
@@ -243,14 +287,22 @@ const Contact = () => {
       );
       if (rightMap) {
         gsap.set(rightMap, { x: 100, opacity: 0, scale: 0.9 });
-        sectionTl.to(rightMap, { x: 0, opacity: 1, scale: 1, duration: 1, ease: "back.out(1.4)" }, 0.6);
+        sectionTl.to(
+          rightMap,
+          { x: 0, opacity: 1, scale: 1, duration: 1, ease: "back.out(1.4)" },
+          0.6,
+        );
       }
 
       // Animation cho travel guide
       const travelGuide = contactMapRef.current?.querySelector(".bg-gray-50");
       if (travelGuide) {
         gsap.set(travelGuide, { y: 50, opacity: 0 });
-        sectionTl.to(travelGuide, { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, 0.8);
+        sectionTl.to(
+          travelGuide,
+          { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+          0.8,
+        );
       }
     }, contactMapRef);
 
@@ -270,10 +322,15 @@ const Contact = () => {
       });
 
       // Animation cho section title
-      const globalTitle = globalNetworkRef.current?.querySelector(".text-center h3");
+      const globalTitle =
+        globalNetworkRef.current?.querySelector(".text-center h3");
       if (globalTitle) {
         gsap.set(globalTitle, { y: -50, opacity: 0 });
-        sectionTl.to(globalTitle, { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
+        sectionTl.to(
+          globalTitle,
+          { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+          0,
+        );
       }
 
       // Animation cho office cards
@@ -321,7 +378,7 @@ const Contact = () => {
   // Remove the console.log debug section effect since it's not needed
   useEffect(() => {
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
@@ -586,7 +643,9 @@ const Contact = () => {
   const tContent = translations[language] || translations.vi;
 
   return (
-    <div className={`contact-page ${scrolled ? "scrolled" : ""} manrope-regular`}>
+    <div
+      className={`contact-page ${scrolled ? "scrolled" : ""} manrope-regular`}
+    >
       {/* Hero Section với animation giống Home */}
       <section className="relative min-h-[70vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden hero-section">
         {/* Background Image với responsive overlay */}
@@ -611,7 +670,7 @@ const Contact = () => {
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 text-blue-100 font-light px-4">
               {tContent.heroSubtitle}
             </p>
-            
+
             {/* Scroll Indicator giống Home */}
             <div className="flex flex-col items-center space-y-3 mt-8 md:mt-10">
               <div
@@ -688,7 +747,9 @@ const Contact = () => {
                           {tContent.address}
                           <br />
                           <span className="font-medium">
-                            {language === "vi" ? "Giờ làm việc:" : "Working Hours:"}
+                            {language === "vi"
+                              ? "Giờ làm việc:"
+                              : "Working Hours:"}
                           </span>{" "}
                           {language === "vi"
                             ? "Thứ 2 - Thứ 6: 8:00 - 17:00"
@@ -716,7 +777,9 @@ const Contact = () => {
                           />
                         </svg>
                       </div>
-                      <h5 className="font-bold mb-2 text-sm sm:text-base">{tContent.phone}</h5>
+                      <h5 className="font-bold mb-2 text-sm sm:text-base">
+                        {tContent.phone}
+                      </h5>
                       <p className="text-gray-700 text-xs sm:text-sm">
                         {tContent.vietnamPhone}{" "}
                         <a
@@ -760,7 +823,9 @@ const Contact = () => {
                           />
                         </svg>
                       </div>
-                      <h5 className="font-bold mb-2 text-sm sm:text-base">{tContent.email}</h5>
+                      <h5 className="font-bold mb-2 text-sm sm:text-base">
+                        {tContent.email}
+                      </h5>
                       <p className="text-gray-700 text-xs sm:text-sm">
                         {tContent.generalInquiry}{" "}
                         <a
@@ -864,50 +929,54 @@ const Contact = () => {
                 </p>
 
                 <form className="space-y-4 sm:space-y-6">
-                  {["name", "email", "phone", "subject", "message"].map((field) => (
-                    <div key={field}>
-                      <label className="block mb-1 sm:mb-2 text-xs sm:text-sm font-medium">
-                        {tContent.formLabels[field]}
-                      </label>
-                      {field === "subject" ? (
-                        <select className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/10 border border-white/20 text-white text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/40 transition-all">
-                          {tContent.subjectOptions.map((option, index) => (
-                            <option
-                              key={index}
-                              value={option.value}
-                              className="text-gray-800"
-                            >
-                              {option.label}
-                            </option>
-                          ))}
-                        </select>
-                      ) : field === "message" ? (
-                        <textarea
-                          rows="3"
-                          className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/10 border border-white/20 text-white text-sm sm:text-base placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/40 transition-all"
-                          placeholder={
-                            language === "vi"
-                              ? "Xin chào Agua, tôi quan tâm đến..."
-                              : "Hello Agua, I'm interested in..."
-                          }
-                          required
-                        />
-                      ) : (
-                        <input
-                          type={field === "email" ? "email" : "text"}
-                          className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/10 border border-white/20 text-white text-sm sm:text-base placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/40 transition-all"
-                          placeholder={
-                            field === "name"
-                              ? language === "vi" ? "Nguyễn Văn A" : "John Smith"
-                              : field === "email"
-                              ? "example@email.com"
-                              : "+84 123 456 789"
-                          }
-                          required={field !== "phone"}
-                        />
-                      )}
-                    </div>
-                  ))}
+                  {["name", "email", "phone", "subject", "message"].map(
+                    (field) => (
+                      <div key={field}>
+                        <label className="block mb-1 sm:mb-2 text-xs sm:text-sm font-medium">
+                          {tContent.formLabels[field]}
+                        </label>
+                        {field === "subject" ? (
+                          <select className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/10 border border-white/20 text-white text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/40 transition-all">
+                            {tContent.subjectOptions.map((option, index) => (
+                              <option
+                                key={index}
+                                value={option.value}
+                                className="text-gray-800"
+                              >
+                                {option.label}
+                              </option>
+                            ))}
+                          </select>
+                        ) : field === "message" ? (
+                          <textarea
+                            rows="3"
+                            className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/10 border border-white/20 text-white text-sm sm:text-base placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/40 transition-all"
+                            placeholder={
+                              language === "vi"
+                                ? "Xin chào Agua, tôi quan tâm đến..."
+                                : "Hello Agua, I'm interested in..."
+                            }
+                            required
+                          />
+                        ) : (
+                          <input
+                            type={field === "email" ? "email" : "text"}
+                            className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-white/10 border border-white/20 text-white text-sm sm:text-base placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/40 transition-all"
+                            placeholder={
+                              field === "name"
+                                ? language === "vi"
+                                  ? "Nguyễn Văn A"
+                                  : "John Smith"
+                                : field === "email"
+                                  ? "example@email.com"
+                                  : "+84 123 456 789"
+                            }
+                            required={field !== "phone"}
+                          />
+                        )}
+                      </div>
+                    ),
+                  )}
 
                   <button
                     type="submit"
@@ -949,7 +1018,10 @@ const Contact = () => {
       </section>
 
       {/* Interactive Map Section với responsive height */}
-      <section ref={contactMapRef} className="contact-map py-12 sm:py-16 md:py-20 bg-white">
+      <section
+        ref={contactMapRef}
+        className="contact-map py-12 sm:py-16 md:py-20 bg-white"
+      >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 sm:mb-12 md:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4 text-gray-900">
@@ -962,10 +1034,16 @@ const Contact = () => {
 
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
             <div>
-              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">{tContent.mainOffice}</h3>
+              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">
+                {tContent.mainOffice}
+              </h3>
               <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-                <p className="text-gray-700 text-sm sm:text-base">{tContent.officeDescription1}</p>
-                <p className="text-gray-700 text-sm sm:text-base">{tContent.officeDescription2}</p>
+                <p className="text-gray-700 text-sm sm:text-base">
+                  {tContent.officeDescription1}
+                </p>
+                <p className="text-gray-700 text-sm sm:text-base">
+                  {tContent.officeDescription2}
+                </p>
               </div>
 
               <div className="bg-gray-50 p-4 sm:p-6 rounded-xl">

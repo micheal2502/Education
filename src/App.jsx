@@ -9,7 +9,7 @@ import { AnimatePresence } from "framer-motion";
 import { Navigation } from "./components/Navbar";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import Home from "./pages/Home";
-import About from "./pages/About";
+import FounderPage from "./pages/About/Founder";
 import Services from "./pages/Service/PersonalizedEducation";
 import Contact from "./pages/Contact";
 import Landing from "./pages/Landing";
@@ -26,6 +26,8 @@ import Program from "./pages/Service/Programn";
 import SixSenses from "./pages/Service/SixSenses";
 import AguaWritingRetreat from "./pages/Service/Writing";
 import StudyAbroadPreparation from "./pages/Service/StudyAboard";
+import CoreValue from "./pages/Philosophy/CoreValue";
+import MentorPage from "./pages/About/Mentor";
 
 const App = () => {
   const location = useLocation();
@@ -36,19 +38,31 @@ const App = () => {
       {/* Wrap everything with LanguageProvider */}
       <div className="min-h-screen flex flex-col">
         {!isLandingPage && <Navigation />}
-        
+
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Landing />} />
             <Route path="/home" element={<Home />} />
             <Route path="/philosophy" element={<Philosophy />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/philosophy/corevalue" element={<Philosophy />} />
+            <Route path="/philosophy/mission" element={<CoreValue />} />
+
+            <Route path="/about" element={<FounderPage />} />
+            <Route path="/about/founder" element={<FounderPage />} />
+            <Route path="/about/mentor" element={<MentorPage />} />
+
             <Route path="/services" element={<Services />} />
             <Route path="/services/personalized" element={<Services />} />
             <Route path="/services/program" element={<Program />} />
             <Route path="/services/program/sixsenses" element={<SixSenses />} />
-            <Route path="/services/program/writing" element={<AguaWritingRetreat />} />
-            <Route path="/services/program/studyaboard" element={<StudyAbroadPreparation />} />
+            <Route
+              path="/services/program/writing"
+              element={<AguaWritingRetreat />}
+            />
+            <Route
+              path="/services/program/studyaboard"
+              element={<StudyAbroadPreparation />}
+            />
 
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/contact" element={<Contact />} />
